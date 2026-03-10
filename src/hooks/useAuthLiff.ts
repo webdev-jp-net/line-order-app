@@ -49,7 +49,7 @@ export const useAuthLiff = (): QueryStatus => {
         if (lineIdToken) {
           // サーバー上でLINE ID Tokenを元にLINEユーザーIDを取得する
           // LINEユーザーIDをJWTに格納したuserTokenを受け取り、以降のAPIアクセスではこれを使用
-          const baseUrl = import.meta.env.VITE_API_ENDPOINT || ''
+          const baseUrl = import.meta.env.VITE_API_BASE_URL || ''
           const fetchRes = await fetch(`${baseUrl}/user-token`, {
             method: 'GET',
             headers: {
