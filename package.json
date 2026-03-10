@@ -87,6 +87,12 @@
     "vite": "^6.0.0",
     "vitest": "^3.2.4"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@parcel/watcher"
+    ]
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
       "bash -c 'files=$(echo \"$0\" | grep -v \"/test/\"); if [ -n \"$files\" ]; then eslint --ext ts,tsx --report-unused-disable-directives --max-warnings 0 $files; fi'"
