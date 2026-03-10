@@ -1,0 +1,28 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm install 22.13.0
+        - nvm use 22.13.0
+        - echo "22.13.0" > .node-version
+        - node -v
+        - npm install -g pnpm
+        - pnpm install --frozen-lockfile=true
+        - sh src/data/generator/_getApiDataEvent.sh "${MICROCMS_EVENT_SERVICE}" "${MICROCMS_EVENT_SERVICE_KEY}"
+        - node src/data/generator/_generateCustomJsonEvent.js
+        - sh src/data/getMediaEvent.sh
+        - sh src/data/generator/_getApiDataUtil.sh "${MICROCMS_UTIL_SERVICE}" "${MICROCMS_UTIL_SERVICE_KEY}"
+        - node src/data/generator/_generateCustomJsonUtil.js
+        - sh src/data/getMediaUtil.sh
+    build:
+      commands:
+        - pnpm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - ~/.pnpm-store

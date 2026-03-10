@@ -1,0 +1,32 @@
+@use "style/_variable" as *;
+
+.notFound {
+  @include tmp_layout;
+
+  display: grid;
+  align-content: center;
+}
+
+.header,
+.body,
+.footer {
+  @include tmp_column;
+
+  place-items: center;
+}
+
+.title {
+  @include tmp_subTitle;
+
+  text-align: center;
+}
+
+.number {
+  @include tmp_title;
+
+  display: block;
+}
+
+.paragraph {
+  @include tmp_paragraph;
+}

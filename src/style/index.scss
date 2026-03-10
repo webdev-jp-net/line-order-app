@@ -1,0 +1,144 @@
+@use 'modern-css-reset';
+@use 'sass:math';
+@use 'style/_variable' as *;
+@import 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..700&display=swap';
+
+:root {
+  /* text color */
+  --txt-basic: #0d0a0a;
+  --txt-description: #999;
+  --txt-accent: #0070b3;
+  --txt-on-fill: #fff;
+  --txt-link: #0070b3;
+  --txt-alert: #e83838;
+  --txt-disabled: #777;
+
+  /* background color */
+  --bg-basic: #fff;
+  --bg-body: #ffe000;
+  --bg-accent: #ffca36;
+  --bg-secondary: #0070b3;
+  --bg-conversion: #0d0a0a;
+  --bg-light: #f7f7f7;
+  --bg-disabled: #c4c4c4;
+  --bg-screen: #0e0b0b40;
+
+  /* texture */
+  --bg-stripe: repeating-linear-gradient(
+      -60.8deg,
+      transparent,
+      #00000013 0.2%,
+      #00000013 0.22%,
+      transparent 0.5%,
+      transparent 2%
+    )
+    repeat left top / #{rem(240) rem(240)};
+
+  /* border color */
+  --border-default: #0d0a0a;
+  --border-light: #dbdbdb;
+
+  /* font */
+  --font-basic: 'Noto Sans JP';
+  --font-latin: 'Barlow Semi Condensed';
+
+  /* z-index */
+  --z-index-loading: 25;
+  --z-index-splash: 20;
+  --z-index-floating: 15;
+  --z-index-dialog: 10;
+  --z-index-screen: 5;
+  --z-index-basic: 1;
+
+  /* animation */
+  --transition-ease: 250ms ease;
+  --transition-enter: 375ms ease-out;
+  --transition-leave: 250ms ease-in;
+  --ease-bounce: cubic-bezier(0.25, -0.33, 0.33, 1.5);
+
+  /* adjust wide screen */
+  --max-width: 430px;
+
+  /* navigation size */
+  --navigation-height: rem(64);
+}
+
+// basic style
+html {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  font-family:
+    'Noto Sans JP',
+    'Hiragino Kaku Gothic ProN',
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    sans-serif;
+  font-size: math.div(16, 375) * 100vw; // 幅375pxのアートボードで16px相当
+  color: var(--txt-basic);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-body);
+
+  // 画面幅430を超えたらリキッドを解除してセンタリング
+  @media screen and (width > 430px) {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    margin-inline: auto;
+    font-size: 18.3467px;
+    background-color: var(--bg-conversion);
+  }
+
+  // スクロールを停止
+  &:has([data-stop-scrolling='true']) {
+    overflow: hidden;
+  }
+
+  // スクロールアニメーション
+  &:not([data-location-change='true']) {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  font-family:
+    'Murecho Variable',
+    'Hiragino Kaku Gothic ProN',
+    -apple-system,
+    BlinkMacSystemFont,
+    Roboto,
+    sans-serif;
+  font-size: 1rem; // 幅375pxのアートボードで16px相当
+  color: var(--txt-basic);
+  background-color: var(--bg-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // スクロールを停止
+  &:has([data-stop-scrolling='true']) {
+    overflow: hidden;
+  }
+
+  // スクロールアニメーション
+  &:not([data-location-change='true']) {
+    scroll-behavior: smooth;
+  }
+}
+
+[id='root'] {
+  position: relative;
+  display: grid;
+  min-height: 100svh;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+
+  &:not([class]) {
+    @include tmp_link;
+  }
+}

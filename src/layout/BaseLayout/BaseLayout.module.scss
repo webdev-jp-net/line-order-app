@@ -1,0 +1,11 @@
+@use 'style/_variable' as *;
+
+.layout {
+  position: relative;
+  display: grid;
+  padding: 0 0 var(--navigation-height); // グロナビの高さ分上げる
+
+  header~& {
+    padding-top: var(--layout-header-height);
+  }
+}

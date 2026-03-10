@@ -1,0 +1,123 @@
+@use '../function/rem' as *;
+@use '../mixin/rect' as *;
+@use './text' as *;
+
+// ページレイアウト
+@mixin tmp_layout {
+  width: 100%;
+  padding: 0 0 rem(64);
+  overflow-x: hidden;
+
+  // 画面幅430を超えたらリキッドを解除してセンタリング
+  @media screen and (width > 430px) {
+    max-width: 430px;
+    margin: 0 auto;
+    margin-inline: auto;
+  }
+}
+
+// カラムレイアウト
+@mixin tmp_column {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  padding: 0 rem(24);
+  margin: rem(24) 0 0;
+
+  > * {
+    z-index: var(--z-index-basic);
+  }
+}
+
+// スクロールに追従しない固定位置背景装飾
+@mixin tmp_bg {
+  position: relative;
+  z-index: 0;
+  height: 100%;
+
+  & > * {
+    z-index: 1;
+  }
+
+}
+
+// 絶対配置要素をPCレイアウトでスマホ枠におさめる
+@mixin tmp_adjust-wide-screen {
+  @media screen and (width > 430px) {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+}
+
+// カッコの形のフレーム
+@mixin tmp_layout-frame {
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    display: block;
+    width: rem(6);
+    pointer-events: none;
+    user-select: none;
+    content: '';
+    border: solid var(--border-light);
+  }
+
+  &::before {
+    inset: 0 auto 0 0;
+    border-width: 1px 0 1px 1px;
+  }
+
+  &::after {
+    inset: 0 0 0 auto;
+    border-width: 1px 1px 1px 0;
+  }
+}
+
+// ふきだし
+@mixin tmp_balloon {
+  position: relative;
+  display: grid;
+  width: 100%;
+  padding: rem(16);
+  font-size: rem(14);
+  line-height: 1.75;
+  background-color: var(--bg-light);
+  border-radius: rem(10);
+
+  // balloon tail
+  &::before {
+    @include rect(rem(14), rem(28));
+
+    position: absolute;
+    inset: auto auto rem(-25) rem(40);
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    content: '';
+    background-color: var(--bg-light);
+    clip-path: polygon(5% 0, 100% 0, 0% 100%);
+  }
+
+  &.--reverse::before {
+    inset: auto rem(40) rem(-25) auto;
+    clip-path: polygon(0 0, 95% 0, 100% 100%);
+  }
+
+  :global(.nameTag) {
+    position: absolute;
+    top: rem(-16);
+    left: rem(16);
+    display: inline-flex;
+    place-content: center;
+    width: fit-content;
+    min-width: rem(64 + 8 + 8);
+    height: rem(25);
+    padding: 0 rem(8);
+    font-size: rem(14);
+    color: var(--txt-on-fill);
+    background-color: var(--txt-accent);
+    border-radius: rem(8);
+  }
+}

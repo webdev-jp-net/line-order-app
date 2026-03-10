@@ -1,0 +1,79 @@
+@use 'style/_variable' as *;
+
+.radioField {
+  position: relative;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+}
+
+.input {
+  display: none;
+}
+
+.label {
+  position: relative;
+  display: flex;
+  padding: rem(12) rem(12) rem(12) rem(36);
+  font-weight: 500;
+  cursor: pointer;
+
+  // ラジオボタン
+  svg:first-child {
+    @include rect(rem(18));
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: rem(0);
+    margin: auto rem(3);
+  }
+
+  .done {
+    opacity: 0;
+    stroke: var(--txt-accent);
+    stroke-width: 4;
+    transition: opacity 250ms;
+  }
+
+  &::before {
+    @include rect(rem(24));
+
+    position: absolute;
+    inset: 0 auto 0 0;
+    display: block;
+    margin: rem(12) 0 auto auto;
+    content: '';
+    background-color: var(--bg-basic);
+    border-radius: 50%;
+  }
+
+  &::after {
+    @include rect(rem(24));
+
+    position: absolute;
+    inset: 0 auto 0 0;
+    display: block;
+    margin: rem(12) 0 auto auto;
+    content: '';
+    background-color: var(--txt-accent);
+    border-radius: 50%;
+    transition: scale 250ms var(--ease-bounce);
+    scale: 0;
+  }
+
+  .input:checked ~ &::after {
+    background-size: 100% 100%;
+    scale: 0.5;
+  }
+}

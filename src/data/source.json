@@ -1,0 +1,60 @@
+{
+  "website": {
+    "url": "https://example.com",
+    "image": "/images/source/source_website_banner.webp"
+  },
+  "tweetUrl": "https://example.com",
+  "contactUrl": "https://example.com",
+  "systemSupport": "https://example.com",
+  "exHuntersVillage": {
+    "url": "",
+    "keyword": ""
+  },
+  "accessMapImage": "/images/source/source_access_map.webp",
+  "modelRouteImage": "/images/source/source_model_route.webp",
+  "playGuide": [
+    {
+      "title": "1",
+      "body": "<p>解説1</p>",
+      "image": "/images/source/source_playguide_1.webp"
+    },
+    {
+      "title": "2",
+      "body": "<p>解説2</p>",
+      "image": "/images/source/source_playguide_2.webp"
+    },
+    {
+      "title": "3",
+      "body": "<p>解説3</p>",
+      "image": "/images/source/source_playguide_3.webp"
+    },
+    {
+      "title": "4",
+      "body": "<p>解説4</p>",
+      "image": "/images/source/source_playguide_4.webp"
+    }
+  ],
+  "award": [
+    {
+      "fieldId": "award",
+      "awardId": "complete",
+      "title": "クリア賞",
+      "image": "/images/source/source_award_complete.webp",
+      "description": "クリアした方にはノベルティをプレゼント！",
+      "annotaion": [
+        {
+          "fieldId": "line",
+          "text": "プレゼントは数に限りがあります。"
+        },
+        {
+          "fieldId": "line",
+          "text": "プレゼントは予告なく変更となる場合がございます。あらかじめご了承ください。"
+        }
+      ],
+      "exchangeSpotName": "引き換え場所",
+      "businessHour": "9:00～19:00（不定休）",
+      "secret": "0123456789",
+      "annotation": []
+    }
+  ]
+}

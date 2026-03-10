@@ -1,0 +1,62 @@
+@use 'style/_variable' as *;
+
+.splash {
+  @include tmp_layout;
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-splash);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  transition: opacity 125ms ease;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    display: block;
+    content: '';
+    background-color: var(--bg-body);
+  }
+
+  &[aria-busy='true'] {
+    pointer-events: none;
+
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  &[aria-hidden='true'] {
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+// スプラッシュコンテンツ
+.body {
+  @include rect(100%);
+
+  display: grid;
+  gap: rem(40);
+  place-content: center;
+}
+
+.title {
+  @include tmp_title;
+
+  text-align: center;
+}
+
+.guide {
+  @include textStroke($stroke: rem(4));
+
+  font-size: rem(16);
+  color: var(--txt-accent);
+  text-align: center;
+
+  [aria-busy='true'] & {
+    opacity: 0;
+  }
+}

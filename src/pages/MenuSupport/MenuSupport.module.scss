@@ -1,0 +1,70 @@
+@use 'style/_variable' as *;
+
+.menuSupport {
+  @include tmp_layout;
+}
+
+.header {
+  @include tmp_column;
+}
+
+.title {
+  @include tmp_title;
+
+  text-align: center;
+}
+
+.description {
+  @include tmp_paragraph;
+}
+
+.body {
+  @include tmp_column;
+}
+
+.table {
+  display: table;
+  padding: 0 rem(16) rem(16);
+  background: var(--bg-basic);
+  border-radius: rem(4);
+}
+
+.row {
+  display: table-row;
+}
+
+.label {
+  display: table-cell;
+  padding: rem(16) rem(8) 0 0;
+}
+
+.value {
+  display: table-cell;
+  padding: rem(16) 0 0;
+  word-break: break-all;
+  white-space: break-spaces;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: rem(24);
+  padding: 0 rem(16);
+  margin: rem(24) 0 0;
+}
+
+.subTitle {
+  font-size: rem(20);
+  font-weight: 700;
+  font-feature-settings: 'palt';
+  line-height: 1.5;
+  color: var(--txt-accent);
+}
+
+.paragraph {
+  @include tmp_paragraph;
+}
+
+[class].copy {
+  background: var(--bg-light);
+}

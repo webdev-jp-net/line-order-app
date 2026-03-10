@@ -1,0 +1,38 @@
+@use 'style/_variable' as *;
+
+.textarea {
+  position: relative;
+  width: 100%;
+
+  textarea {
+    @include tmp_textBox;
+
+    padding: rem(8) rem(16);
+
+    &::placeholder {
+      font-weight: 700;
+    }
+
+    &:not(:disabled) {
+      height: rem(150);
+    }
+
+    &:disabled {
+      height: rem(60);
+      overflow: hidden;
+      color: var(--txt-disabled);
+      resize: none;
+      background-color: var(--bg-disabled);
+    }
+  }
+
+  .counter {
+    margin: 0;
+    text-align: right;
+
+    &:disabled {
+      color: var(--txt-disabled);
+      background-color: var(--bg-disabled);
+    }
+  }
+}

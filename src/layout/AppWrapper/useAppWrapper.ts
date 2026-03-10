@@ -1,0 +1,99 @@
+import { useEffect, useLayoutEffect } from 'react'
+
+import { useDispatch, useSelector } from 'react-redux'
+
+import { useLocation } from 'react-router-dom'
+
+import { useAuthLiff } from 'hooks/useAuthLiff'
+import { useLoader } from 'hooks/useLoader'
+import { AppDispatch, RootState } from 'store'
+import { setError, setErrorMessage, setTokenError, setIsSplashActive } from 'store/layout'
+
+export const useAppWrapper = () => {
+  const dispatch = useDispatch<AppDispatch>()
+  const location = useLocation()
+
+  // グローバルステートからエラー状態とエラーメッセージを受け取る
+  const {
+    error: globalError,
+    tokenError,
+    errorMessage,
+    isSplashActive,
+  } = useSelector((state: RootState) => state.layout)
+
+  // 認証
+  const { actLoginLiff, userToken, error, loading } = useAuthLiff()
+
+  // データ取得
+  const { isLoading: isLoadingData } = useLoader({ userToken })
+
+  // /prize/survey/:id ではSplashを表示しない（外部アンケートフォームからの直接リダイレクト対応）
+  const shouldHideSplash = location.pathname.startsWith('/prize/survey/')
+
+  useLayoutEffect(() => {
+    if (shouldHideSplash && isSplashActive) {
+      dispatch(setIsSplashActive(false))
+    }
+  }, [shouldHideSplash, isSplashActive, dispatch])
+
+  // LIFF初期化（初回のみ実行）
+  // userToken: undefined = 未初期化, null = 認証失敗, string = 認証成功
+  useEffect(() => {
+    if (userToken === undefined && !error) {
+      actLoginLiff()
+    }
+  }, [userToken, error, actLoginLiff])
+
+  // 401エラー後の再認証（ダイアログクローズ後に実行）
+  useEffect(() => {
+    // tokenErrorがfalseになった（ダイアログが閉じられた）かつuserTokenがnullの場合に再認証
+    if (!tokenError && userToken === null && !error) {
+      actLoginLiff()
+    }
+  }, [tokenError, userToken, error, actLoginLiff])
+
+  // エラーダイアログのハンドラー
+  const handleUpdateErrorDialog = () => dispatch(setErrorMessage(''))
+  const handleCloseErrorDialog = () => dispatch(setError(false))
+  const handleCloseTokenErrorDialog = () => dispatch(setTokenError(false))
+
+  // スプラッシュ画面のハンドラー
+  const handleClearSplash = () => dispatch(setIsSplashActive(false))
+
+  // ローディング状態の判定
+  // LIFF認証処理中、データ取得中、またはuserToken未取得でエラーもない状態をローディングとする
+  const isLoading = loading || isLoadingData || (!userToken && !error)
+
+  // location.pathnameの変更を検知するとスクロール位置を先頭へリセット
+  useEffect(() => {
+    const html = document.querySelector('html')
+    if (!html) return
+
+    // ハッシュ#が含まれていない場合は先頭までスクロール
+    if (!location.hash) {
+      html.setAttribute('data-location-change', 'true')
+      window.scrollTo({
+        top: 0,
+        behavior: 'auto',
+      })
+      setTimeout(() => {
+        html.removeAttribute('data-location-change')
+      }, 500) // 500msはスムーススクロールの推定時間。実際には調整が必要
+      return
+    }
+  }, [location.pathname, location.hash])
+
+  return {
+    userToken,
+    isLoading,
+    isSplashActive,
+    shouldHideSplash,
+    handleClearSplash,
+    globalError,
+    tokenError,
+    errorMessage,
+    handleUpdateErrorDialog,
+    handleCloseErrorDialog,
+    handleCloseTokenErrorDialog,
+  }
+}

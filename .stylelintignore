@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+dist/
+dist-ssr/
+
+# document directory
+_document/
+
+# cache
+.cache/
+
+# misc
+*.log
+*.local
+.DS_Store

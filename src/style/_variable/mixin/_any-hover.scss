@@ -1,0 +1,32 @@
+/**
+ * @description: hoverへ対応している端末のみへ適用
+ * @example:
+ * .customButton {
+ *   background-color: white;
+ *   @include any-hover {
+ *     transition: background-color 250ms ease-in; // enter
+ *     background-color: black;
+ *   }
+ *   @include any-hover-leave {
+ *     transition: background-color 1s ease-out; // leave
+ *   }
+ * }
+*/
+
+@mixin any-hover-leave() {
+  @content;
+}
+
+@mixin any-hover($option: false) {
+  // hoverに対応しているデバイスのみに適用
+  @media (any-hover: hover) {
+    @if $option {
+      @include any-hover-leave;
+    }
+
+    // 非活性ではない要素に対してhoverスタイルを定義
+    &:hover:not(:disabled, [aria-disabled='true']) {
+      @content;
+    }
+  }
+}

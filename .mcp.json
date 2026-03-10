@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "--context",
+        "ide-assistant",
+        "--project",
+        "."
+      ],
+      "cwd": "."
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "npmPackageScanner": {
+      "url": "https://www.package-scanner.dev/api/mcp"
+    }
+  }
+}

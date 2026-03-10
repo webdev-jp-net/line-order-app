@@ -1,0 +1,93 @@
+@use 'style/_variable' as *;
+
+.button {
+  &.--minor {
+    @include tmp_button(minor);
+  }
+
+  &.--basic {
+    @include tmp_button(basic);
+  }
+
+  &.--accent {
+    @include tmp_button(accent);
+  }
+
+  &.--link {
+    @include tmp_link;
+  }
+
+  // tailIconがある場合のボタンスタイル
+  &[class]:has(> .tailIcon) {
+    position: relative;
+    padding-right: rem(8 + 20 + 16);
+
+    &.--link {
+      padding-right: rem(20 + 4);
+    }
+  }
+}
+
+// 左端のアイコン
+.headIcon {
+  .--full & {
+    @include rect(rem(22));
+
+    margin-right: rem(12);
+  }
+
+  .--liquid & {
+    @include rect(rem(20));
+
+    margin-right: rem(8);
+  }
+
+  .--link & {
+    @include rect(rem(20));
+
+    position: relative;
+    top: rem(2);
+    margin-right: rem(8);
+  }
+}
+
+// 右端のアイコン
+.tailIcon {
+  position: absolute;
+  inset: 0;
+
+  .--full & {
+    @include rect(rem(22));
+
+    position: absolute;
+    inset: 0;
+    margin: auto rem(16) auto auto;
+  }
+
+  .--liquid & {
+    @include rect(rem(20));
+
+    position: absolute;
+    inset: 0;
+    margin: auto rem(12) auto auto;
+  }
+
+  .--link & {
+    @include rect(rem(18));
+
+    position: absolute;
+    inset: 0;
+    margin: auto 0 auto auto;
+  }
+}
+
+button.--link {
+  display: inline-flex;
+  place-content: center;
+  place-items: center;
+  border: none;
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}

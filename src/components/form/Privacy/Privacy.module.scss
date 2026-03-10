@@ -1,0 +1,19 @@
+@use 'style/_variable' as *;
+
+.privacy {
+  //
+}
+
+.label {
+  @include tmp_txt-description;
+
+  display: flex;
+  gap: rem(8);
+  align-items: start;
+}
+
+.checkbox {
+  @include rect(rem(24));
+
+  min-width: rem(24);
+}

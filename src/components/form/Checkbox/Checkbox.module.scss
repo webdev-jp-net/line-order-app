@@ -1,0 +1,74 @@
+@use 'style/_variable' as *;
+
+.checkboxField {
+  position: relative;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  display: none;
+}
+
+.label {
+  position: relative;
+  display: flex;
+  padding: rem(12) rem(12) rem(12) rem(36);
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+
+  // チェックボックス
+  svg:first-child {
+    @include rect(rem(18));
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: rem(0);
+    margin: auto rem(3);
+  }
+
+  .done {
+    opacity: 0;
+    stroke: var(--txt-accent);
+    stroke-width: 4;
+    transition: opacity 125ms;
+  }
+
+  &::before {
+    @include rect(rem(24));
+
+    position: absolute;
+    inset: 0 auto 0 0;
+    display: block;
+    // margin: rem(12) 0 auto auto;
+    margin: auto 0;
+    content: '';
+    background-color: var(--bg-basic);
+    border-radius: rem(4);
+  }
+
+  .input:checked ~ & {
+    .done {
+      opacity: 1;
+      stroke-dasharray: 29.783;
+      stroke-dashoffset: 29.783;
+      transition: none;
+      animation: checkPath 250ms ease-out 0s forwards;
+    }
+  }
+}

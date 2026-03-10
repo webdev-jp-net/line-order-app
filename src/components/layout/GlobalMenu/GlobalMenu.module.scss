@@ -1,0 +1,56 @@
+@use 'style/_variable' as *;
+
+.globalMenu {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: var(--z-index-basic);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, rem(72));
+  place-content: center;
+  place-items: center;
+  min-height: var(--floating-navigation-height);
+  padding: rem(6) 0 rem(12);
+  color: var(--txt-basic);
+  background-color: var(--bg-basic);
+
+  // 画面幅430を超えたらリキッドを解除してセンタリング
+  @media screen and (width > 430px) {
+    max-width: 430px;
+    margin: 0 auto;
+    margin-inline: auto;
+  }
+}
+
+.link {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: rem(4);
+  place-items: center;
+  text-decoration: none;
+
+  &[aria-current='page'] {
+    color: var(--txt-accent);
+  }
+}
+
+.icon {
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
+
+.svg {
+  @include rect(rem(40));
+}
+
+.label {
+  font-size: rem(9);
+  font-weight: medium;
+  line-height: 1;
+  text-align: center;
+
+  .segment:not(.--inactive) & {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,25 @@
+@use "style/_variable" as *;
+
+.maintenance {
+  @include tmp_layout;
+
+  display: grid;
+  align-content: center;
+}
+
+.header,
+.body {
+  @include tmp_column;
+
+  place-items: center;
+}
+
+.title {
+  @include tmp_title;
+
+  text-align: center;
+}
+
+.paragraph {
+  @include tmp_paragraph;
+}

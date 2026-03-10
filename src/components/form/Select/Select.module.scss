@@ -1,0 +1,26 @@
+@use 'style/_variable' as *;
+
+.select {
+  position: relative;
+  width: 100%;
+}
+
+.selectElement {
+  @include tmp_textBox;
+
+  &:disabled {
+    color: var(--txt-disabled);
+    background-color: var(--bg-disabled);
+  }
+}
+
+// ▼ のアイコン
+.icon {
+  @include rect(rem(22));
+
+  position: absolute;
+  inset: 0 0 0 auto;
+  margin: auto rem(16);
+  color: currentColor;
+  pointer-events: none;
+}

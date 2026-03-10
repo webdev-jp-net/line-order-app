@@ -1,0 +1,103 @@
+@use '../function/rem' as *;
+
+// ポコっと出現
+@mixin tmp_bubble($delay: 250ms) {
+  transition:
+    opacity 250ms $delay ease-out,
+    scale 300ms $delay cubic-bezier(0.68, -0.33, 0.27, 2);
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    scale: 0.85;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    translate: 0 0;
+  }
+
+  2% {
+    scale: 1 0.95;
+    translate: 0 0;
+  }
+
+  12% {
+    scale: 1.05 0.98;
+    translate: 0 0;
+  }
+
+  24% {
+    scale: 1 1;
+    translate: 0 rem(-8);
+  }
+
+  80% {
+    scale: 0.98 1.05;
+    translate: 0 0;
+  }
+}
+
+// 跳ねるループ
+@mixin tmp_bounce-loop($duration: 500ms, $delay: 100ms) {
+  transform-origin: center bottom;
+  animation: bounce $duration $delay linear infinite;
+}
+
+@mixin tmp_animation-scroll($delay: 125ms) {
+  transition:
+    opacity 500ms $delay ease-out,
+    translate 750ms $delay ease-out;
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    translate: 0 rem(18);
+  }
+}
+
+// 右向きに2pxくいくいっと動くリピートアニメーションのフレーム
+@keyframes move-right {
+  0% {
+    translate: 0 0;
+  }
+
+  100% {
+    translate: rem(2) 0;
+  }
+}
+
+// チェックアニメーション
+@keyframes checkPath {
+  0%,
+  50% {
+    stroke-dashoffset: 29.783;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+// ポコっとでてくるやつ
+@mixin tmp_animation-bounce($delay: 250ms) {
+  transition:
+    opacity 250ms $delay ease-out,
+    scale 300ms $delay cubic-bezier(0.68, -0.33, 0.27, 2);
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    scale: 0.85;
+  }
+}
+
+// 下からすっと出てくるやつ
+@mixin tmp_animation-scroll($delay: 125ms) {
+  transition:
+    opacity 500ms $delay ease-out,
+    translate 750ms $delay ease-out;
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    translate: 0 rem(18);
+  }
+}

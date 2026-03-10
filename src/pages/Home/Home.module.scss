@@ -1,0 +1,100 @@
+@use "style/_variable" as *;
+
+.home {
+  @include tmp_layout;
+}
+
+.header {
+  @include tmp_column;
+
+  text-align: center;
+}
+
+.title {
+  @include tmp_title;
+}
+
+.description {
+  @include tmp_txt-description;
+}
+
+.body {
+  @include tmp_column;
+
+  padding: rem(24);
+  background-color: var(--bg-basic);
+}
+
+.section {
+  @include tmp_layout-frame;
+
+  display: grid;
+  gap: rem(16);
+  padding: rem(24);
+}
+
+.footer {
+  @include tmp_column;
+
+  text-align: center;
+}
+
+// dummy
+.subTitle {
+  @include tmp_subTitle;
+
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: rem(8);
+  padding: 0;
+  list-style: none;
+
+  > li {
+    @include rect(100%);
+    @include tmp_txt-small;
+
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1 / 1;
+    padding: rem(8);
+    background: var(--bg-light);
+
+    &[data-unlocked='true'] {
+      color: var(--txt-disabled);
+      background: var(--bg-light) var(--bg-stripe);
+
+      svg {
+        stroke-width: 1.2;
+      }
+    }
+  }
+}
+
+.icon {
+  @include rect(rem(40));
+}
+
+.question {
+  display: grid;
+  grid-template-columns: 1fr rem(64);
+  gap: rem(8);
+  align-items: center;
+}
+
+.questionTitle {
+  @include tmp_txt-body;
+}
+
+.questionAnswer {
+  @include rect(rem(64));
+
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--bg-light) var(--bg-stripe);
+}

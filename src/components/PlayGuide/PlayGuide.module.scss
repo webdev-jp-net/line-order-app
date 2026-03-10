@@ -1,0 +1,137 @@
+@use 'style/_variable' as *;
+
+// ダイアログ
+.playGuide {
+  padding: rem(40) rem(24);
+
+  :global(.screen) {
+    z-index: var(--z-index-dialog);
+  }
+
+  [class*='screen'] {
+    @include tmp_bg;
+
+    position: fixed;
+    inset: 0;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: var(--z-index-screen);
+      display: block;
+      content: '';
+      background: var(--bg-screen);
+    }
+  }
+
+  .skip {
+    position: absolute;
+    inset: 0 0 auto auto;
+    z-index: var(--z-index-dialog);
+    display: inline-flex;
+    gap: rem(5);
+    align-items: center;
+    width: rem(85);
+    height: rem(32);
+    padding: 0 rem(8) 0 rem(16);
+    margin: rem(24);
+    font-family: 'Kaisei Opti', sans-serif;
+    font-size: rem(16);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--txt-on-fill);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid var(--txt-on-fill);
+    border-radius: rem(54);
+    transition: none;
+  }
+
+  .skipIcon {
+    display: block;
+    flex-shrink: 0;
+  }
+}
+
+.container {
+  position: relative;
+  z-index: var(--z-index-dialog);
+  display: flex;
+  flex-direction: column;
+  width: rem(327);
+  min-width: min(rem(320), 100%);
+  max-width: 430px;
+  min-height: rem(420);
+  max-height: calc(100svh - rem(40 + 40));
+  padding: rem(24);
+  overflow-y: hidden;
+  background-color: var(--bg-light);
+  border-radius: rem(10);
+}
+
+.figure {
+  width: 100%;
+  height: rem(128);
+}
+
+.image {
+  @include rect(100%);
+
+  object-fit: contain;
+}
+
+.title {
+  margin: rem(8) 0 0;
+  font-size: rem(24);
+  font-weight: 700;
+  font-feature-settings: 'palt';
+  line-height: 1.5;
+  color: var(--txt-current);
+  text-align: center;
+}
+
+.description {
+  margin: rem(8) 0 0;
+  line-height: 1.75;
+
+  :global(.accent) {
+    color: var(--txt-current);
+  }
+}
+
+.console {
+  display: flex;
+  gap: rem(12);
+  align-items: center;
+  justify-content: space-between;
+  margin: auto 0 0;
+
+  .stepper {
+    font-family: 'Kaisei Opti', sans-serif;
+    font-size: rem(24);
+    color: var(--txt-accent);
+    text-align: center;
+  }
+
+  [class*='icon'].prevButton,
+  [class*='icon'].nextButton {
+    width: rem(80);
+    border-radius: rem(999);
+  }
+
+  .prevButton svg {
+    transform: scaleX(-1);
+  }
+}
+
+.completeButton {
+  position: relative;
+  z-index: var(--z-index-dialog);
+  margin: rem(24) 0 0;
+
+  &[aria-hidden='true'] {
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+  }
+}

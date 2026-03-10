@@ -1,0 +1,133 @@
+@use 'style/_variable' as *;
+
+.dialog {
+  @include tmp_adjust-wide-screen;
+
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-dialog);
+  display: grid;
+  place-items: center;
+  padding: rem(40) 0;
+  overflow-y: auto;
+
+  &[aria-hidden='true'] {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &[aria-hidden='false'] {
+    pointer-events: default;
+    user-select: auto;
+  }
+}
+
+// スクリーン
+.screen {
+  @include tmp_adjust-wide-screen;
+
+  position: fixed;
+  inset: 0;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-index-screen);
+    display: block;
+    content: '';
+    background: var(--bg-screen);
+  }
+
+  // headless UI Transition
+  &.enter {
+    transition: opacity #{(250 * 0.5) * 1ms} ease-out;
+  }
+
+  &.leave {
+    transition: opacity #{(250 * 2) * 1ms} 175ms ease-out;
+  }
+
+  &.enterFrom,
+  &.leaveTo {
+    opacity: 0;
+  }
+
+  &.enterTo,
+  &.leaveFrom {
+    opacity: 1;
+  }
+}
+
+.content,
+.contentWrapper {
+  // headless UI Transition
+  &.enter {
+    transition: opacity 500ms 175ms ease-out;
+  }
+
+  &.leave {
+    transition: opacity 250ms ease-in;
+  }
+
+  &.enterFrom,
+  &.leaveTo {
+    opacity: 0;
+  }
+
+  &.enterTo,
+  &.leaveFrom {
+    opacity: 1;
+  }
+}
+
+.content:not(.contentWrapper) {
+  position: relative;
+  z-index: var(--z-index-screen);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: rem(8);
+  width: rem(327);
+  min-width: min(rem(320), 100%);
+  max-width: 430px;
+  max-height: calc(100svh - rem(40 + 40));
+  padding: rem(24);
+  overflow-y: hidden;
+  background: var(--bg-light);
+  border-radius: rem(10);
+}
+
+// タイトル
+:global(.header) {
+  padding: rem(16) rem(16) 0;
+}
+
+:global(.title) {
+  font-size: rem(24);
+  font-weight: 700;
+  color: var(--txt-accent);
+  line-height: 1.5;
+}
+
+// 本文
+:global(.body) {
+  min-height: 0; // gridレイアウトでのオーバーフロー問題を防ぐ
+  padding: 0 rem(16);
+  overflow-y: auto;
+}
+
+:global(.paragraph) {
+  @include tmp_paragraph;
+}
+
+// フッター
+.footer {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: rem(16);
+  justify-content: flex-start;
+  padding: rem(16) 0 0;
+
+  [class*='button'] {
+    min-width: rem(114);
+  }
+}

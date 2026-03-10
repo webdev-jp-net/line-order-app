@@ -1,0 +1,57 @@
+@use '../function/rem' as *;
+@use './text' as *;
+
+// 汎用フォーム
+@mixin tmp_form {
+  display: grid;
+  gap: rem(24);
+  width: 100%;
+}
+
+// 汎用フィールド
+@mixin tmp_field {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  width: 100%;
+}
+
+// テキストボックス
+@mixin tmp_textBox {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: rem(8) rem(16);
+  font-size: rem(16);
+  color: var(--txt-basic);
+  appearance: none;
+  background-color: var(--bg-light);
+  border: none;
+  border-radius: rem(8);
+
+  &:focus-visible {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: var(--bg-disabled);
+  }
+
+  &:disabled {
+    color: var(--txt-disabled);
+    background: var(--bg-stripe);
+    background-color: var(--bg-light);
+  }
+
+  // ユーザーが入力を開始した後の状態を判別してスタイルを変更
+  &:user-invalid:not([data-saved='true']) {
+    color: var(--txt-alert);
+  }
+}
+
+// フィールド付随の告知
+@mixin tmp_fieldNote {
+  @include tmp_txt-overline;
+
+  margin: rem(8) rem(16) 0;
+}

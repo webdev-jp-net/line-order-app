@@ -1,0 +1,9 @@
+@use 'style/_variable' as *;
+
+.input {
+  width: 100%;
+
+  > input {
+    @include tmp_textBox;
+  }
+}

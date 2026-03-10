@@ -1,0 +1,9 @@
+@use "style/_variable" as *;
+
+.survey {
+  @include tmp_layout;
+}
+
+.body {
+  @include tmp_column;
+}

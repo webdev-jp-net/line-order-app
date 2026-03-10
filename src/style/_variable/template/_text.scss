@@ -1,0 +1,97 @@
+@use "../function/rem" as *;
+
+// リンクテキスト
+@mixin tmp_linkText {
+  font-size: rem(14);
+  line-height: 1.75;
+  color: var(--txt-link);
+  text-decoration: underline;
+  text-underline-offset: rem(6);
+}
+
+// ページタイトル（謎日本語タイトル）
+@mixin tmp_title {
+  font-size: rem(32);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: rem(1.28);
+}
+
+// サブタイトル（謎英字タイトル）
+@mixin tmp_subTitle {
+  font-size: rem(20);
+  font-weight: 700;
+  font-feature-settings: "pwid" on;
+  line-height: 1.5;
+  letter-spacing: rem(0.8);
+  // TODO: font-family
+}
+
+// headline
+@mixin tmp_headline {
+  font-size: rem(24);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+// 準見出しの文
+@mixin tmp_txt-lead {
+  font-size: rem(18);
+  line-height: 1.5;
+}
+
+// スタンダードな本文文字
+@mixin tmp_txt-body {
+  font-size: rem(16);
+}
+
+// 注釈文字
+@mixin tmp_txt-description {
+  font-size: rem(14);
+}
+
+// 小文字
+@mixin tmp_txt-small {
+  font-size: rem(12);
+}
+
+// 汎用段落
+@mixin tmp_paragraph {
+  font-size: rem(16);
+  line-height: 1.8;
+}
+
+// ※印の注釈リスト
+@mixin tmp_annotation {
+  position: relative;
+  margin: rem(8) 0 0;
+  font-size: rem(14);
+
+  &::before {
+    margin: 0 rem(4) 0 0;
+    content: "※";
+  }
+}
+
+// 縁取りの装飾
+@mixin textStroke($text: attr(data-text), $stroke: rem(3), $color: var(--bg-light)) {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+
+  &::before,
+  &::after {
+    position: absolute;
+    inset: 0;
+    content: $text;
+  }
+
+  &::before {
+    -webkit-text-stroke: $stroke #{$color};
+    color: #{$color};
+  }
+
+  &::after {
+    color: currentColor;
+  }
+}

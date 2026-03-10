@@ -1,0 +1,66 @@
+@use 'style/_variable' as *;
+
+.loading {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-index-loading);
+  display: grid;
+  place-content: center;
+  place-items: center;
+  transition: none;
+
+  // 画面幅430を超えたらリキッドを解除してセンタリング
+  @media screen and (width > 430px) {
+    max-width: 430px;
+    margin: 0 auto;
+    margin-inline: auto;
+  }
+
+  [aria-busy='false'] & {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+  }
+}
+
+.loadingContent {
+  display: flex;
+  gap: rem(6);
+  align-items: center;
+  margin: 0 auto;
+}
+
+.dot {
+  @include rect(rem(8), rem(8));
+
+  display: block;
+  background-color: var(--txt-basic);
+  border-radius: 50%;
+  animation: dotFade 1200ms ease-in-out infinite;
+
+  &:nth-child(2) {
+    animation-delay: 250ms;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 500ms;
+  }
+}
+
+@keyframes dotFade {
+  0% {
+    opacity: 1;
+  }
+
+  40% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
