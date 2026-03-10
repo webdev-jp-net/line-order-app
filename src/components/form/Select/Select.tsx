@@ -9,11 +9,11 @@ export type SelectOption = {
   value: string | number
 }
 
-type SelectProps = JSX.IntrinsicElements['select'] & {
+type SelectProps = React.JSX.IntrinsicElements['select'] & {
   children?: React.ReactNode
   option: SelectOption[]
   name: string
-  handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void
+  handleChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void
   placeholder?: string
 }
 
@@ -41,9 +41,9 @@ export const Select: FC<SelectProps> = props => {
       >
         <option value="">{placeholder}</option>
         {children}
-        {option.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.label}
+        {option.map((item: SelectOption) => (
+          <option key={item.value} value={item.value}>
+            {item.label}
           </option>
         ))}
       </select>

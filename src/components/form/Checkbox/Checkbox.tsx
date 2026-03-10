@@ -9,7 +9,7 @@ interface CheckboxOption {
   value: string | number
 }
 
-interface CheckboxProps extends Omit<JSX.IntrinsicElements['input'], 'type' | 'onChange'> {
+interface CheckboxProps extends Omit<React.JSX.IntrinsicElements['input'], 'type' | 'onChange'> {
   options: CheckboxOption[]
   name: string
   values?: (string | number)[]

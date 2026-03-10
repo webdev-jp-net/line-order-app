@@ -1,6 +1,4 @@
-import type { MemoryRouter as Router } from 'react-router-dom'
-
-import type { Meta, StoryObj, StoryFn } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Privacy } from './Privacy'
 
@@ -8,13 +6,13 @@ export default {
   title: 'form/Privacy',
   component: Privacy,
   decorators: [
-    (Story: StoryFn<typeof Router>) => (
+    Story => (
       <div className="decorator center">
         <Story />
       </div>
     ),
   ],
-} as Meta
+} satisfies Meta<typeof Privacy>
 
 export const Basic: StoryObj<typeof Privacy> = {
   args: {

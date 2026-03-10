@@ -1,6 +1,4 @@
-import type { MemoryRouter as Router } from 'react-router-dom'
-
-import type { Meta, StoryObj, StoryFn } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Input } from './Input'
 
@@ -8,13 +6,13 @@ export default {
   title: 'form/Input',
   component: Input,
   decorators: [
-    (Story: StoryFn<typeof Router>) => (
+    Story => (
       <div className="decorator center">
         <Story />
       </div>
     ),
   ],
-} as Meta
+} satisfies Meta<typeof Input>
 
 export const Basic: StoryObj<typeof Input> = {
   args: {

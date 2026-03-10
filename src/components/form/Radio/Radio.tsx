@@ -9,7 +9,7 @@ interface RadioOption {
   value: string | number
 }
 
-interface RadioProps extends Omit<JSX.IntrinsicElements['input'], 'type' | 'onChange'> {
+interface RadioProps extends Omit<React.JSX.IntrinsicElements['input'], 'type' | 'onChange'> {
   options: RadioOption[]
   name: string
   value?: string | number

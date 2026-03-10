@@ -8,10 +8,6 @@ type State = {
     image: string
   }
   tweetUrl: string
-  huntersVillage: {
-    url: string
-    keyword: string
-  }
   exHuntersVillage: {
     url: string
     keyword: string
@@ -30,10 +26,6 @@ const initialState: State = {
     image: sourceData.website?.image ?? '',
   },
   tweetUrl: sourceData.tweetUrl ?? '',
-  huntersVillage: {
-    url: sourceData.huntersVillage?.url ?? '',
-    keyword: sourceData.huntersVillage?.keyword ?? '',
-  },
   exHuntersVillage: {
     url: sourceData.exHuntersVillage?.url ?? '',
     keyword: sourceData.exHuntersVillage?.keyword ?? '',

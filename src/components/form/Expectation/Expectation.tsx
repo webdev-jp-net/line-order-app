@@ -9,7 +9,7 @@ export interface ExpectationOption {
   value: number
 }
 
-interface ExpectationProps extends Omit<JSX.IntrinsicElements['input'], 'type' | 'onChange'> {
+interface ExpectationProps extends Omit<React.JSX.IntrinsicElements['input'], 'type' | 'onChange'> {
   options?: ExpectationOption[]
   name: string
   value?: number

@@ -1,6 +1,4 @@
-import type { MemoryRouter as Router } from 'react-router-dom'
-
-import type { Meta, StoryObj, StoryFn } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import { Lightbulb, HelpCircle } from 'lucide-react'
 
@@ -10,13 +8,13 @@ export default {
   title: 'ui/Disclosure',
   component: Disclosure,
   decorators: [
-    (Story: StoryFn<typeof Router>) => (
+    Story => (
       <div className="decorator center">
         <Story />
       </div>
     ),
   ],
-} as Meta
+} satisfies Meta<typeof Disclosure>
 
 export const Basic: StoryObj<typeof Disclosure> = {
   args: {

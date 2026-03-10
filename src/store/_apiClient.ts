@@ -121,6 +121,8 @@ export type UserProfile = {
   ageGroup: 0 | 1 | 2 | 3 | 4 | 5 | 6
   /** 居住地（都道府県コード） */
   residence: string
+  /** 交通手段（0:車, 1:電車, 2:バス, 3:自転車, 4:徒歩） */
+  transportation?: 0 | 1 | 2 | 3 | 4
 }
 export type NotFoundError = {}
 export type BadRequestError = {
