@@ -1,0 +1,17 @@
+[
+  {
+    "id": "l_72t-dvbm",
+    "name": "レモネード（おかわり）",
+    "price": 300,
+    "category": {
+      "id": "drink",
+      "name": "ドリンク"
+    },
+    "mainImage": {
+      "url": "/menu/l_72t-dvbm.webp",
+      "width": 800,
+      "height": 800
+    },
+    "description": "<p>2杯目からのレモネードです</p>"
+  }
+]

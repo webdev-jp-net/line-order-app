@@ -25,7 +25,10 @@ LIFF（LINE MINI App）で動く注文アプリのフロントエンドです。
 
 ### デプロイ
 
-- **Cloudflare（Wrangler）** - 静的アセット配信（SPA）
+- **Vercel**（`vercel.json`）。ビルドコマンド `pnpm build` の直前に `prebuild` が自動実行され、メニューを取り込んでからビルドする
+- `vercel.json` の役割:
+  - `buildCommand: pnpm build` — `prebuild`（メニュー取り込み）を確実に走らせる
+  - `rewrites` — SPA のため、全パスを `index.html` に返してクライアント側ルーティングを成立させる（`/menu` 等の直アクセス対策）
 
 ---
 
@@ -79,6 +82,39 @@ pnpm format     # 整形
 pnpm storybook  # Storybook
 pnpm test       # テスト
 ```
+
+---
+
+## メニュー（microCMS）
+
+メニューはmicroCMSで管理し、ビルド時に取り込んで同梱します（実行時はmicroCMSへ通信しません）。
+
+取り込みは `prebuild` で行います。`pnpm build` を実行すると、その直前に自動で `prebuild` が走ります（npm/pnpm のライフサイクル）。手動で取り込むときは `pnpm prebuild` を実行します。
+
+`prebuild` の中身（`src/data/generator/`、3段）:
+
+- `_getApiData.sh` — microCMS から生データを `src/data/_raw/menu.json` に取得
+- `_generateCustomJson.js` — 生データを整形して `src/data/menu.json` を生成し、画像取得用 `src/data/getMedia.sh` を書き出す
+- `getMedia.sh` — 画像を `public/menu/` にダウンロード（自動生成）
+
+取り込んだ `src/data/menu.json` と `public/menu/` はリポジトリにコミットします（`_raw/` と `getMedia.sh` は中間生成物のため無視）。Vercel のデプロイは `pnpm build` が `prebuild` を自動実行するため、最新メニューが反映されます。
+
+> 注意: `prebuild` は microCMS の鍵（`MICROCMS_SERVICE` / `MICROCMS_SERVICE_KEY`）を使うため、Vercel のプロジェクト環境変数に設定します。CI（build-check）は prebuild を回さず、コミット済みデータでビルド検証するため鍵は不要です。
+
+詳細は仕様リポジトリ `line-order-document`（`_llm-docs/spec/user-app/menu.md`）を参照してください。
+
+---
+
+## API クライアント
+
+`line-order-api` のOpenAPI定義（`src/api/api-structure.yaml`）から、RTK QueryのAPIクライアント（`src/store/_apiClient.ts`）を自動生成します（スキーマ駆動）。
+
+```bash
+pnpm api:gen    # OpenAPI から _apiClient.ts を生成
+pnpm mock-api   # 定義からモックAPIを起動（http://localhost:4010）
+```
+
+`_apiClient.ts` は自動生成ファイルです。手で編集せず `api-structure.yaml` を直して再生成してください。
 
 ---
 

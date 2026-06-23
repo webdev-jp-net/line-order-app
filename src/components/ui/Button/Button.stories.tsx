@@ -1,11 +1,13 @@
 import { Fragment } from 'react'
 
-import { action } from 'storybook/actions'
-import type { Meta, StoryObj } from '@storybook/react'
-
 import { Lightbulb, X, ArrowRight, SquareArrowOutUpRight } from 'lucide-react'
+import { action } from 'storybook/actions'
 
 import { Button } from './Button'
+
+import type { Meta, StoryObj } from '@storybook/react'
+
+
 
 /**
  * ボタンコンポーネント

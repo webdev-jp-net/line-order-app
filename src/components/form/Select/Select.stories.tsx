@@ -1,6 +1,7 @@
+import { Select } from './Select'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Select } from './Select'
 
 export default {
   title: 'form/Select',

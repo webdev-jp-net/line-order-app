@@ -7,7 +7,7 @@ import tseslint from 'typescript-eslint'
 import prettier from 'eslint-config-prettier'
 
 export default tseslint.config(
-  { ignores: ['dist', '_document', 'src/store/_apiClient.ts', '**/*.test.ts', '**/*.test.tsx', 'storybook-static'] },
+  { ignores: ['dist', '_document', 'src/store/_apiClient.ts', 'src/data/generator', '**/*.test.ts', '**/*.test.tsx', 'storybook-static'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],

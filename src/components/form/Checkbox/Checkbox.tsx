@@ -1,8 +1,9 @@
 import type { FC } from 'react'
 
+import styles from './Checkbox.module.scss'
+
 import { useCheckbox } from './useCheckbox'
 
-import styles from './Checkbox.module.scss'
 
 interface CheckboxOption {
   label: string

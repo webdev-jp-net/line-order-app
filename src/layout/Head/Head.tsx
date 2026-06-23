@@ -13,7 +13,7 @@ type HeadProps = {
  */
 export const Head: FC<HeadProps> = ({ pageTitle, type, children }) => {
   const defaultMeta = {
-    title: 'LINE 注文アプリ',
+    title: 'LINE Order',
     type: 'article',
   }
 

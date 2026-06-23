@@ -1,8 +1,9 @@
 import type { FC } from 'react'
 
+import styles from './Radio.module.scss'
+
 import { useRadio } from './useRadio'
 
-import styles from './Radio.module.scss'
 
 interface RadioOption {
   label: React.ReactNode

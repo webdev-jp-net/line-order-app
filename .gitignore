@@ -29,6 +29,10 @@ dist-ssr
 .env.development
 .env.production
 
+# メニュー取り込みの中間生成物（menu.json と public/menu/ はコミットする）
+src/data/_raw/
+src/data/getMedia.sh
+
 # cache files
 .cache/
 

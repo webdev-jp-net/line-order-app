@@ -38,7 +38,7 @@ export const Splash: FC<SplashProps> = ({
         aria-label="START"
         tabIndex={0}
       >
-        <h1 className={styles.title}>LINE Quest App</h1>
+        <h1 className={styles.title}>LINE Order</h1>
         <p className={styles.guide} data-text="START">
           START
         </p>

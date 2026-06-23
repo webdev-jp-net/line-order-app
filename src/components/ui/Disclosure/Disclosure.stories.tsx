@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/react'
 
 import { Lightbulb, HelpCircle } from 'lucide-react'
 
 import { Disclosure } from './Disclosure'
+
+import type { Meta, StoryObj } from '@storybook/react'
 
 export default {
   title: 'ui/Disclosure',

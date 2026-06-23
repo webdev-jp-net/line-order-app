@@ -1,8 +1,9 @@
 import type { FC } from 'react'
 
+import styles from './Textarea.module.scss'
+
 import { useTextarea } from './useTextarea'
 
-import styles from './Textarea.module.scss'
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   children?: React.ReactNode

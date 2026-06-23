@@ -22,7 +22,6 @@ export type GetUserTokenApiResponse = /** status 200 OK */ {
 }
 export type GetUserTokenApiArg = void
 export type PostOrdersApiResponse = /** status 200 OK */ {
-  /** 注文ID */
   orderId?: string
   status?: OrderStatus
 }
@@ -38,17 +37,17 @@ export type GetOrderHistoryApiResponse = /** status 200 OK */ {
 }
 export type GetOrderHistoryApiArg = void
 export type UnauthorizedError = {
-  message: string
+  message?: string
 }
-export type InternalServerError = {
-  message: string
-}
+export type OrderStatus = 'open' | 'done' | 'closed'
 export type BadRequestError = {
-  message: string
+  message?: string
   /** 不正があるリクエスト項目の一覧 */
   errorParams?: string[]
 }
-export type OrderStatus = 'open' | 'done' | 'closed'
+export type InternalServerError = {
+  message?: string
+}
 export type OrderItem = {
   /** microCMS のメニューID */
   productId: string
@@ -58,10 +57,10 @@ export type OrderItem = {
   qty: number
 }
 export type OrderHistoryItem = {
-  orderId: string
-  status: OrderStatus
-  orderList: OrderItem[]
-  createdAt: string
+  orderId?: string
+  status?: OrderStatus
+  orderList?: OrderItem[]
+  createdAt?: string
 }
 export const {
   useGetUserTokenQuery,

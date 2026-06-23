@@ -1,8 +1,9 @@
 import type { FC } from 'react'
 
+import styles from './Input.module.scss'
+
 import { useInput } from './useInput'
 
-import styles from './Input.module.scss'
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode
