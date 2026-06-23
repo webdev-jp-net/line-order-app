@@ -21,13 +21,11 @@ const hasLiffCallbackParams = (search: string) => {
 export const RootRedirect = () => {
   const location = useLocation()
   const userToken = useAppSelector(state => state.liffUser.userToken)
-  const progress = useAppSelector(state => state.player.progress)
-  const profile = useAppSelector(state => state.player.profile)
 
   const shouldWaitForLiffLogin = hasLiffCallbackParams(location.search) && !userToken
 
-  // LIFFログイン待機中、またはprogressまたはprofileのローディング待機
-  if (shouldWaitForLiffLogin || !progress || profile === undefined) {
+  // LIFFログイン待機中はリダイレクトしない
+  if (shouldWaitForLiffLogin) {
     return null
   }
 
@@ -48,6 +46,5 @@ export const RootRedirect = () => {
     return <Navigate to={savedPath} replace />
   }
 
-  // 通常のリダイレクト: profileがnull（404/未登録）なら/story/opening、それ以外は/home
-  return <Navigate to={profile === null ? '/story/opening' : '/home'} replace />
+  return <Navigate to="/home" replace />
 }

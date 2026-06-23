@@ -20,7 +20,6 @@ export const AppWrapper: FC = () => {
   const {
     isLoading,
     isSplashActive,
-    shouldHideSplash,
     handleClearSplash,
     globalError,
     tokenError,
@@ -47,13 +46,11 @@ export const AppWrapper: FC = () => {
       <Outlet />
 
       {/* スプラッシュ */}
-      {!shouldHideSplash && (
-        <Splash
-          isSplashActive={isSplashActive}
-          handleClearSplash={handleClearSplash}
-          isAuthLoading={isLoading}
-        />
-      )}
+      <Splash
+        isSplashActive={isSplashActive}
+        handleClearSplash={handleClearSplash}
+        isAuthLoading={isLoading}
+      />
 
       {/* システムエラーダイアログ */}
       <Dialog isOpen={globalError} easyCloseMode={false} onClose={handleCloseSystemError}>

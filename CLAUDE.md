@@ -2,9 +2,9 @@
 
 ## 初回セッション時のみ
 
-1. **提案**: `git doc-pull` で最新仕様をnt-reform-s-documentから同期
-2. **Serena初期化**: `/mcp__serena__check_onboarding_performed` で確認
-3. **必要ならオンボーディング実行**
+1. 最新仕様をline-order-documentから同期（`_document/` が無ければ初回のみ `git subtree add --prefix=_document git@github.com:webdev-jp-net/line-order-document.git develop --squash`、以降は `git doc-pull`）
+2. Serena初期化 `/mcp__serena__check_onboarding_performed`
+3. 必要ならオンボーディング実行
 
 ## 必須
 
@@ -33,9 +33,7 @@
 
 ## 用語統一システム
 
-- MCPサーバー経由で用語統一チェッカーが利用可能
-- クエリの文脈に基づく自動ドキュメント提案
-- 用語の正式な情報源として`_document/_llm-docs/dictionary.md`を使用
+- 用語の正式な情報源として`_document/_llm-docs/operation/dictionary.md`を使用
 
 ## 厳守事項
 
@@ -51,4 +49,4 @@
 
 ---
 
-**⚠️ このファイルはClaude Codeのエントリーポイント。すべてのロジックは\_document/\_llm-rules/ディレクトリにあります**
+**⚠️ このファイルはClaude Codeのエントリーポイント。すべてのロジックは\_document/\_llm-rules/ディレクトリにあります。**

@@ -1,5 +1,5 @@
 {
-  "name": "line-quest-game",
+  "name": "line-order-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -16,8 +16,6 @@
     "typecheck": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,scss,md}\"",
-    "api:gen": "npx @rtk-query/codegen-openapi src/api/openapi-config.cjs",
-    "mock-api": "prism mock ./_llm-docs/spec/api-structure.yaml -p 4010",
     "scaffold": "scaffdog generate",
     "test": "vitest",
     "test:watch": "vitest --watch",
@@ -26,8 +24,7 @@
     "test:coverage": "vitest run --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky",
-    "get-data": "sh src/data/generator/_getApiData.sh && node src/data/generator/_generateCustomJson.js && sh src/data/getMedia.sh"
+    "prepare": "husky"
   },
   "dependencies": {
     "@dr.pogodin/react-helmet": "^2.0.4",

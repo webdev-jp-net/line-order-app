@@ -2,14 +2,15 @@
 
 ## このドキュメントの役割
 - Gemini CLI / Codex CLI など複数エージェントの共通エントリーポイント
-- すべての作業は `_llm-rules/` 以下の正式ルールに従うこと
+- すべての作業は `_document/_llm-rules/` 以下の正式ルールに従うこと
+- 仕様・ルールの正本は line-order-document（`_document/` に subtree 同期）
 - ルールチェーン: `AGENTS.md` → `session_control.md` → 専門ルール → `core_rules.md`
 
 ## セッション開始フロー（必ず順番どおりに実施）
 1. `git status && git branch --show-current` でブランチと作業ツリーの健全性を確認
-2. `_llm-rules/session_control.md` を全文読了
-3. `_llm-rules/core_rules.md` と `_llm-rules/implementation_principles.md` を読み込み、原則を再確認
-4. `_llm-docs/project.md` を参照し、プロジェクトの背景と要求を把握
+2. `_document/_llm-rules/session_control.md` を全文読了
+3. `_document/_llm-rules/core_rules.md` と `_document/_llm-rules/implementation_principles.md` を読み込み、原則を再確認
+4. `_document/_llm-docs/project.md` を参照し、プロジェクトの背景と要求を把握
 5. タスク種類を分析し、該当する専門ルールを選択して読む
 6. ルールに沿って作業を開始。疑問点や仕様の空白は必ずユーザーに確認
 
@@ -27,7 +28,7 @@
 - 未承認の状態で既存の変更を戻さない。予期しない変更を検知したら速やかにユーザーへ報告
 
 ## 作業完了後に必ず行う記録
-- `_llm-memories/learned.md` など、`session_control.md` の `UPDATE_ACTION` セクションで指定された全ファイルをテーブル形式で更新
+- `_document/_llm-memories/learned.md` など、`session_control.md` の `UPDATE_ACTION` セクションで指定された全ファイルをテーブル形式で更新
 - 記録は客観的事実と再現可能な学びを中心に記載
 
 ## 禁止事項・注意点
@@ -38,4 +39,4 @@
 
 ---
 
-**⚠️ このファイルはすべての AI エージェントのスタート地点です。詳細ロジックは `_llm-rules/` 配下にあります。**
+**⚠️ このファイルはすべての AI エージェントのスタート地点です。詳細ロジックは `_document/_llm-rules/` 配下にあります。**

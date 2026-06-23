@@ -1,9 +1,0 @@
-@use "style/_variable" as *;
-
-.map {
-  @include tmp_layout;
-}
-
-.body {
-  @include tmp_column;
-}

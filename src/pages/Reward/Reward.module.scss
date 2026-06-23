@@ -1,9 +1,0 @@
-@use "style/_variable" as *;
-
-.reward {
-  @include tmp_layout;
-}
-
-.body {
-  @include tmp_column;
-}

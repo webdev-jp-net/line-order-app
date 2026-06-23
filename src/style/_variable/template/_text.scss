@@ -9,7 +9,7 @@
   text-underline-offset: rem(6);
 }
 
-// ページタイトル（謎日本語タイトル）
+// ページタイトル（和文）
 @mixin tmp_title {
   font-size: rem(32);
   font-weight: 700;
@@ -17,7 +17,7 @@
   letter-spacing: rem(1.28);
 }
 
-// サブタイトル（謎英字タイトル）
+// サブタイトル（欧文）
 @mixin tmp_subTitle {
   font-size: rem(20);
   font-weight: 700;

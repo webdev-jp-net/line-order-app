@@ -1,11 +1,10 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useLocation } from 'react-router-dom'
 
 import { useAuthLiff } from 'hooks/useAuthLiff'
-import { useLoader } from 'hooks/useLoader'
 import { AppDispatch, RootState } from 'store'
 import { setError, setErrorMessage, setTokenError, setIsSplashActive } from 'store/layout'
 
@@ -23,18 +22,6 @@ export const useAppWrapper = () => {
 
   // 認証
   const { actLoginLiff, userToken, error, loading } = useAuthLiff()
-
-  // データ取得
-  const { isLoading: isLoadingData } = useLoader({ userToken })
-
-  // /prize/survey/:id ではSplashを表示しない（外部アンケートフォームからの直接リダイレクト対応）
-  const shouldHideSplash = location.pathname.startsWith('/prize/survey/')
-
-  useLayoutEffect(() => {
-    if (shouldHideSplash && isSplashActive) {
-      dispatch(setIsSplashActive(false))
-    }
-  }, [shouldHideSplash, isSplashActive, dispatch])
 
   // LIFF初期化（初回のみ実行）
   // userToken: undefined = 未初期化, null = 認証失敗, string = 認証成功
@@ -62,7 +49,7 @@ export const useAppWrapper = () => {
 
   // ローディング状態の判定
   // LIFF認証処理中、データ取得中、またはuserToken未取得でエラーもない状態をローディングとする
-  const isLoading = loading || isLoadingData || (!userToken && !error)
+  const isLoading = loading || (!userToken && !error)
 
   // location.pathnameの変更を検知するとスクロール位置を先頭へリセット
   useEffect(() => {
@@ -87,7 +74,6 @@ export const useAppWrapper = () => {
     userToken,
     isLoading,
     isSplashActive,
-    shouldHideSplash,
     handleClearSplash,
     globalError,
     tokenError,

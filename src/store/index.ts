@@ -4,17 +4,13 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { persistStore, persistReducer } from 'redux-persist'
 
-import External from './external'
 import { initApi } from './initApi'
 import Layout from './layout'
 import LiffUser, { liffUserPersistConfig } from './liffUser'
-import player, { playerPersistConfig } from './player'
 
 export const rootReducer = combineReducers({
   liffUser: persistReducer(liffUserPersistConfig, LiffUser),
-  player: persistReducer(playerPersistConfig, player),
   layout: Layout,
-  external: External,
   // RTK Query APIスライス
   [initApi.reducerPath]: initApi.reducer,
 })
