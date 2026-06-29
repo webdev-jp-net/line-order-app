@@ -34,7 +34,7 @@ export const useOrderHistory = () => {
       .map(order => {
         const createdAt = order.createdAt ?? ''
 
-        // 各明細を qty ぶんの行に展開
+        // 各明細をqtyぶんの行に展開
         const items: OrderHistoryRow[] = (order.orderList ?? []).flatMap((item, itemIndex) => {
           const qty = item.qty ?? 1
 
