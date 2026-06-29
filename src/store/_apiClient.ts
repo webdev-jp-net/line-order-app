@@ -55,6 +55,8 @@ export type OrderItem = {
   name: string
   /** 数量 */
   qty: number
+  /** 単価（円） */
+  price: number
 }
 export type OrderHistoryItem = {
   orderId?: string

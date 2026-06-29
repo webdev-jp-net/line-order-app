@@ -70,6 +70,7 @@ export const useCart = (onClose: () => void) => {
             productId: item.productId,
             name: item.name,
             qty: 1,
+            price: item.price,
           })),
           liffAccessToken,
         },
