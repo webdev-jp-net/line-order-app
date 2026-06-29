@@ -1,6 +1,6 @@
 # API クライアント生成
 
-`line-order-api` の OpenAPI 定義から、RTK Query の API クライアントを自動生成します。
+`line-order-api` のOpenAPI定義から、RTK QueryのAPIクライアントを自動生成します。
 
 - 定義ファイル: `api-structure.yaml`
 - 生成設定: `openapi-config.cjs`
@@ -16,7 +16,7 @@ pnpm api:gen
 
 ## モックサーバー
 
-定義ファイルからモック API を起動できます。
+定義ファイルからモックAPIを起動できます。
 
 ```bash
 pnpm mock-api   # http://localhost:4010
