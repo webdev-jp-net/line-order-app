@@ -10,11 +10,9 @@ import { Head } from 'layout/Head'
 import { Cart } from 'components/layout/Cart'
 import { Button } from 'components/ui/Button'
 
-
 import styles from './Home.module.scss'
 
 import type { MenuItem } from 'types/menu'
-
 
 const menu = menuData as MenuItem[]
 
@@ -60,7 +58,13 @@ export const Home: FC = () => {
                 <p className={styles.category}>{item.category.name}</p>
                 <p className={styles.name}>{item.name}</p>
                 <p className={styles.price}>¥{item.price.toLocaleString()}</p>
-                <Button type="button" variant="accent" onClick={() => handleAdd(item)}>
+                <Button
+                  type="button"
+                  variant="accent"
+                  size="liquid"
+                  className={styles.cart}
+                  onClick={() => handleAdd(item)}
+                >
                   追加
                 </Button>
               </div>
