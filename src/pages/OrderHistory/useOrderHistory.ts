@@ -4,20 +4,17 @@ import { useGetOrderHistoryQuery, type OrderStatus } from 'store/_apiClient'
 
 import { formatDate, formatTime } from 'utils/day'
 
-// 注文状態の日本語ラベル（dictionary.md の正本にしたがう）
 const statusLabel: Record<OrderStatus, string> = {
   open: '注文受付',
   done: '準備完了',
   closed: '受渡完了',
 }
 
-// 表示する商品1行。個数(qty)は持たせず、同じ商品はqtyぶん行を並べる。
 export type OrderHistoryRow = {
   key: string
   name: string
 }
 
-// オーダー単位の表示モデル
 export type OrderHistoryView = {
   orderId: string
   date: string
@@ -37,7 +34,7 @@ export const useOrderHistory = () => {
       .map(order => {
         const createdAt = order.createdAt ?? ''
 
-        // 各明細を qty ぶんの行に展開（名称は注文データ）
+        // 各明細を qty ぶんの行に展開
         const items: OrderHistoryRow[] = (order.orderList ?? []).flatMap((item, itemIndex) => {
           const qty = item.qty ?? 1
 
