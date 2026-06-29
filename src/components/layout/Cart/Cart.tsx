@@ -1,5 +1,8 @@
 import { type FC } from 'react'
 
+import { useAppDispatch, useAppSelector } from 'store'
+import { closeCart, selectIsCartOpen } from 'store/order'
+
 import { Button } from 'components/ui/Button'
 import { Dialog } from 'components/ui/Dialog'
 import dialogStyles from 'components/ui/Dialog/Dialog.module.scss'
@@ -8,18 +11,18 @@ import styles from './Cart.module.scss'
 
 import { useCart } from './useCart'
 
-type CartProps = {
-  isOpen: boolean
-  onClose: () => void
-}
-
 /**
  * カート
  * @description
  * - 追加した商品の一覧・削除・合計表示・注文確定をまとめたダイアログ
+ * - 開閉はグローバル（order スライス）で管理し、グローバルナビから開く
  * - 「注文」押下で確認ダイアログを前面に表示し、「はい」で POST /orders を実行する
  */
-export const Cart: FC<CartProps> = ({ isOpen, onClose }) => {
+export const Cart: FC = () => {
+  const dispatch = useAppDispatch()
+  const isOpen = useAppSelector(selectIsCartOpen)
+  const close = () => dispatch(closeCart())
+
   const {
     items,
     total,
@@ -29,15 +32,15 @@ export const Cart: FC<CartProps> = ({ isOpen, onClose }) => {
     handleRequestOrder,
     handleCancelOrder,
     handleConfirmOrder,
-  } = useCart(onClose)
+  } = useCart()
 
   return (
     <>
       {/* カート本体 */}
-      <Dialog isOpen={isOpen} easyCloseMode={true} onClose={onClose}>
+      <Dialog isOpen={isOpen} easyCloseMode={true} onClose={close}>
         <div className={`${dialogStyles.header} ${styles.header}`}>
           <h2 className={dialogStyles.title}>カート</h2>
-          <Button type="button" variant="link" onClick={onClose}>
+          <Button type="button" variant="link" onClick={close}>
             ×
           </Button>
         </div>

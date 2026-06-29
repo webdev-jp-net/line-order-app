@@ -1,13 +1,12 @@
-import { type FC, useState } from 'react'
+import { type FC } from 'react'
 
 import menuData from 'data/menu.json'
 import { useAppDispatch } from 'store'
-import { addItem } from 'store/order'
+import { addItem, openCart } from 'store/order'
 
 import { BaseLayout } from 'layout/BaseLayout'
 import { Head } from 'layout/Head'
 
-import { Cart } from 'components/layout/Cart'
 import { Button } from 'components/ui/Button'
 
 import styles from './Home.module.scss'
@@ -30,7 +29,6 @@ const menuGroups: MenuGroup[] = Object.values(
 
 export const Home: FC = () => {
   const dispatch = useAppDispatch()
-  const [isCartOpen, setIsCartOpen] = useState(false)
 
   // 商品を1点カートへ追加し、カートを開く
   const handleAdd = (item: MenuItem) => {
@@ -42,19 +40,14 @@ export const Home: FC = () => {
         mainImage: item.mainImage,
       })
     )
-    setIsCartOpen(true)
+    dispatch(openCart())
   }
 
   return (
     <BaseLayout>
       <Head pageTitle="メニュー" />
       <main className={styles.menu} data-testid="home">
-        <div className={styles.heading}>
-          <h1 className={styles.title}>メニュー</h1>
-          <Button type="button" variant="basic" onClick={() => setIsCartOpen(true)}>
-            カート
-          </Button>
-        </div>
+        <h1 className={styles.title}>メニュー</h1>
         {menuGroups.map(group => (
           <section key={group.category.id} className={styles.category}>
             <h2 className={styles.categoryName}>{group.category.name}</h2>
@@ -90,7 +83,6 @@ export const Home: FC = () => {
           </section>
         ))}
       </main>
-      <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </BaseLayout>
   )
 }

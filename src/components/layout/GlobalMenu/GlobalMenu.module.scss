@@ -27,7 +27,14 @@
   flex-direction: column;
   gap: rem(4);
   place-items: center;
+  padding: 0;
+  font: inherit;
+  color: inherit;
   text-decoration: none;
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: none;
 
   &[aria-current='page'] {
     color: var(--txt-accent);
@@ -35,9 +42,26 @@
 }
 
 .icon {
+  position: relative;
   display: grid;
   place-content: center;
   place-items: center;
+}
+
+.badge {
+  position: absolute;
+  top: rem(-4);
+  right: rem(-8);
+  display: grid;
+  place-content: center;
+  min-width: rem(16);
+  height: rem(16);
+  padding: 0 rem(4);
+  font-size: rem(10);
+  line-height: 1;
+  color: var(--txt-on-fill);
+  background-color: var(--bg-secondary);
+  border-radius: rem(999);
 }
 
 .svg {
@@ -45,7 +69,7 @@
 }
 
 .label {
-  font-size: rem(9);
+  font-size: rem(10);
   font-weight: medium;
   line-height: 1;
   text-align: center;

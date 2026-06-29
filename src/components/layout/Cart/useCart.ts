@@ -6,13 +6,12 @@ import liff from '@line/liff/core'
 import { useAppDispatch, useAppSelector } from 'store'
 import { usePostOrdersMutation } from 'store/_apiClient'
 import { setError, setErrorMessage } from 'store/layout'
-import { selectCartItems, selectCartTotal, removeItem, clearCart } from 'store/order'
+import { selectCartItems, selectCartTotal, removeItem, clearCart, closeCart } from 'store/order'
 
 /**
  * カートの表示・操作・注文確定ロジック
- * @param onClose カート（ダイアログ）を閉じるための呼び出し元ハンドラー
  */
-export const useCart = (onClose: () => void) => {
+export const useCart = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -77,9 +76,9 @@ export const useCart = (onClose: () => void) => {
         },
       }).unwrap()
 
-      // 成功: カートを空にして注文履歴へ遷移
+      // 成功: カートを空にして閉じ、注文履歴へ遷移
       dispatch(clearCart())
-      onClose()
+      dispatch(closeCart())
       navigate('/order-history')
     } catch {
       notifyOrderError()

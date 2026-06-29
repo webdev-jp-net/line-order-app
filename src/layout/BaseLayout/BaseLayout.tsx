@@ -1,5 +1,6 @@
 import { FC, HTMLAttributes } from 'react'
 
+import { Cart } from 'components/layout/Cart'
 import { GlobalMenu } from 'components/layout/GlobalMenu'
 
 import styles from './BaseLayout.module.scss'
@@ -24,7 +25,12 @@ export const BaseLayout: FC<BaseLayoutProps> = ({
   return (
     <>
       <div className={`${styles.layout} ${backgroundClass}`.trim()}>{children}</div>
-      {showGlobalMenu && <GlobalMenu />}
+      {showGlobalMenu && (
+        <>
+          <GlobalMenu />
+          <Cart />
+        </>
+      )}
     </>
   )
 }

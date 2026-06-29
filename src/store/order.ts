@@ -16,10 +16,13 @@ export type CartItem = {
 type State = {
   // 追加順（古い→新しい）に並ぶカート品目
   items: CartItem[]
+  // カート（オーバーレイ）の開閉
+  isOpen: boolean
 }
 
 const initialState: State = {
   items: [],
+  isOpen: false,
 }
 
 const order = createSlice({
@@ -45,11 +48,19 @@ const order = createSlice({
     clearCart: state => {
       state.items = []
     },
+    // カートを開く
+    openCart: state => {
+      state.isOpen = true
+    },
+    // カートを閉じる
+    closeCart: state => {
+      state.isOpen = false
+    },
   },
 })
 
 // Action Creator
-export const { addItem, removeItem, clearCart } = order.actions
+export const { addItem, removeItem, clearCart, openCart, closeCart } = order.actions
 
 // Reducer
 export default order.reducer
@@ -57,5 +68,9 @@ export default order.reducer
 // Selectors
 export const selectCartItems = (state: { order: State }) => state.order.items
 
+export const selectCartCount = (state: { order: State }) => state.order.items.length
+
 export const selectCartTotal = (state: { order: State }) =>
   state.order.items.reduce((total, item) => total + item.price, 0)
+
+export const selectIsCartOpen = (state: { order: State }) => state.order.isOpen
