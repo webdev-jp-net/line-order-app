@@ -2,7 +2,7 @@ import type { FC } from 'react'
 
 import { Link, useLocation } from 'react-router-dom'
 
-import { UtensilsCrossed, type LucideIcon } from 'lucide-react'
+import { UtensilsCrossed, History, type LucideIcon } from 'lucide-react'
 
 import styles from './GlobalMenu.module.scss'
 
@@ -15,6 +15,7 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   { to: '/home', variant: 'menu', label: 'メニュー', icon: UtensilsCrossed },
+  { to: '/order-history', variant: 'history', label: '履歴', icon: History },
 ]
 
 export const GlobalMenu: FC = () => {

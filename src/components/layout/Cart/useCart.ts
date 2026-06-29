@@ -58,6 +58,7 @@ export const useCart = (onClose: () => void) => {
   const handleConfirmOrder = async () => {
     const liffAccessToken = liff.getAccessToken()
     if (!liffAccessToken) {
+      setIsConfirmOpen(false)
       notifyOrderError()
       return
     }
@@ -78,11 +79,13 @@ export const useCart = (onClose: () => void) => {
 
       // 成功: カートを空にして注文履歴へ遷移
       dispatch(clearCart())
-      setIsConfirmOpen(false)
       onClose()
       navigate('/order-history')
     } catch {
       notifyOrderError()
+    } finally {
+      // 成功・失敗いずれでも確認ダイアログを閉じる
+      setIsConfirmOpen(false)
     }
   }
 

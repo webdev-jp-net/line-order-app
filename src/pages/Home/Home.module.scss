@@ -51,8 +51,14 @@
 }
 
 .category {
-  font-size: rem(12);
-  color: var(--txt-basic);
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+}
+
+.categoryName {
+  font-size: rem(16);
+  font-weight: 700;
 }
 
 .name {
