@@ -1,0 +1,31 @@
+@use "style/_variable" as *;
+
+.orderHistory {
+  @include tmp_layout;
+}
+
+.list,
+.order,
+.items {
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  gap: rem(24);
+}
+
+.order {
+  gap: rem(8);
+}
+
+.items {
+  gap: rem(8);
+}
+
+.orderHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: rem(8);
+}
