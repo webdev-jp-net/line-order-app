@@ -28,14 +28,6 @@ export const GlobalMenu: FC = () => {
         <p className={styles.label}>メニュー</p>
       </Link>
 
-      <button type="button" className={styles.link} onClick={() => dispatch(openCart())}>
-        <div className={styles.icon}>
-          <ShoppingCart className={styles.image} />
-          {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
-        </div>
-        <p className={styles.label}>カート</p>
-      </button>
-
       <Link
         to="/order-history"
         className={styles.link}
@@ -46,6 +38,14 @@ export const GlobalMenu: FC = () => {
         </div>
         <p className={styles.label}>注文履歴</p>
       </Link>
+
+      <button type="button" className={styles.link} onClick={() => dispatch(openCart())}>
+        <div className={styles.icon}>
+          <ShoppingCart className={styles.image} />
+          {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+        </div>
+        <p className={styles.label}>カート</p>
+      </button>
     </nav>
   )
 }

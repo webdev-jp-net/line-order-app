@@ -13,6 +13,7 @@ const statusLabel: Record<OrderStatus, string> = {
 export type OrderHistoryRow = {
   key: string
   name: string
+  price: number
 }
 
 export type OrderHistoryView = {
@@ -20,6 +21,7 @@ export type OrderHistoryView = {
   date: string
   status: string
   items: OrderHistoryRow[]
+  total: number
 }
 
 export const useOrderHistory = () => {
@@ -34,21 +36,28 @@ export const useOrderHistory = () => {
       .map(order => {
         const createdAt = order.createdAt ?? ''
 
+        const orderList = order.orderList ?? []
+
         // 各明細をqtyぶんの行に展開
-        const items: OrderHistoryRow[] = (order.orderList ?? []).flatMap((item, itemIndex) => {
+        const items: OrderHistoryRow[] = orderList.flatMap((item, itemIndex) => {
           const qty = item.qty ?? 1
 
           return Array.from({ length: qty }, (_, repeatIndex) => ({
             key: `${order.orderId ?? 'order'}-${itemIndex}-${repeatIndex}`,
             name: item.name,
+            price: item.price ?? 0,
           }))
         })
+
+        // 合計金額（単価 × 数量 の総和）
+        const total = orderList.reduce((sum, item) => sum + (item.price ?? 0) * (item.qty ?? 1), 0)
 
         return {
           orderId: order.orderId ?? '',
           date: [formatDate(createdAt), formatTime(createdAt)].filter(Boolean).join(' '),
           status: order.status ? statusLabel[order.status] : '',
           items,
+          total,
         }
       })
   }, [data])

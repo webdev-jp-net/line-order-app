@@ -32,10 +32,12 @@ export const OrderHistory: FC = () => {
                 <ul className={styles.itemList}>
                   {order.items.map(item => (
                     <li key={item.key} className={styles.item}>
-                      {item.name}
+                      <span className={styles.itemName}>{item.name}</span>
+                      <span className={styles.itemPrice}>¥{item.price.toLocaleString()}</span>
                     </li>
                   ))}
                 </ul>
+                <p className={styles.total}>合計 ¥{order.total.toLocaleString()}</p>
               </li>
             ))}
           </ul>
