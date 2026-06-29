@@ -7,10 +7,12 @@ import { persistStore, persistReducer } from 'redux-persist'
 import { initApi } from './initApi'
 import Layout from './layout'
 import LiffUser, { liffUserPersistConfig } from './liffUser'
+import Order from './order'
 
 export const rootReducer = combineReducers({
   liffUser: persistReducer(liffUserPersistConfig, LiffUser),
   layout: Layout,
+  order: Order,
   // RTK Query APIスライス
   [initApi.reducerPath]: initApi.reducer,
 })
