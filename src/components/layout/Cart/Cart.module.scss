@@ -1,0 +1,64 @@
+@use 'style/_variable' as *;
+
+// ヘッダー（タイトル＋閉じる）
+.header {
+  display: flex;
+  place-items: center;
+  justify-content: space-between;
+}
+
+// 商品リスト
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: rem(64) 1fr auto;
+  gap: rem(12);
+  align-items: center;
+}
+
+.image {
+  width: rem(64);
+  height: rem(64);
+  object-fit: cover;
+  border-radius: rem(8);
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: rem(4);
+  min-width: 0;
+}
+
+.name {
+  @include tmp_txt-body;
+
+  font-weight: 700;
+}
+
+.price {
+  @include tmp_txt-description;
+}
+
+// フッター（合計＋注文）
+.footer {
+  display: flex;
+  place-items: center;
+  justify-content: space-between;
+  gap: rem(16);
+  padding-top: rem(16);
+}
+
+.total {
+  @include tmp_txt-body;
+
+  font-weight: 700;
+}
