@@ -2,7 +2,7 @@
 // https://redux-toolkit.js.org/rtk-query/usage/code-generation#simple-usage
 const config = {
   // OpenAPI の定義ファイル
-  schemaFile: './api-structure.yaml',
+  schemaFile: '../../_document/_llm-docs/spec/api-structure.yaml',
   // 元になる RTK Query の定義ファイル
   apiFile: '../store/initApi.ts',
   // 元になる RTK Query の関数名

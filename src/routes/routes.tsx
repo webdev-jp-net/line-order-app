@@ -7,6 +7,7 @@ import { AppWrapper } from 'layout/AppWrapper'
 import { Home } from 'pages/Home'
 import { Maintenance } from 'pages/Maintenance'
 import { NotFound } from 'pages/NotFound'
+import { OrderHistory } from 'pages/OrderHistory'
 
 import { RootRedirect } from './RootRedirect'
 
@@ -27,6 +28,7 @@ export const App: FC = () => {
                 element: <RootRedirect />,
               },
               { path: 'home', element: <Home /> },
+              { path: 'order-history', element: <OrderHistory /> },
             ],
           },
           // メンテナンスページ表示確認

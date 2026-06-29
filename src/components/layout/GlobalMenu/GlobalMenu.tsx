@@ -2,49 +2,50 @@ import type { FC } from 'react'
 
 import { Link, useLocation } from 'react-router-dom'
 
-import { UtensilsCrossed, type LucideIcon } from 'lucide-react'
+import { UtensilsCrossed, ShoppingCart, History } from 'lucide-react'
+import { useAppDispatch, useAppSelector } from 'store'
+import { openCart, selectCartCount } from 'store/order'
 
 import styles from './GlobalMenu.module.scss'
 
-type MenuItem = {
-  to: string
-  variant: string
-  label: string
-  icon: LucideIcon
-}
-
-const menuItems: MenuItem[] = [
-  { to: '/home', variant: 'menu', label: 'メニュー', icon: UtensilsCrossed },
-]
-
 export const GlobalMenu: FC = () => {
   const location = useLocation()
+  const dispatch = useAppDispatch()
+  const cartCount = useAppSelector(selectCartCount)
 
-  const isCurrentPath = (path: string) => {
-    if (path === '/') {
-      return location.pathname === '/'
-    }
-    return location.pathname.startsWith(path)
-  }
+  const isCurrent = (path: string) => location.pathname.startsWith(path)
 
   return (
     <nav className={styles.globalMenu}>
-      {menuItems.map(item => {
-        const isCurrent = isCurrentPath(item.to)
-        return (
-          <Link
-            key={item.to}
-            to={item.to}
-            className={styles.link}
-            aria-current={isCurrent ? 'page' : undefined}
-          >
-            <div className={styles.icon}>
-              <item.icon className={styles.image} />
-            </div>
-            <p className={styles.label}>{item.label}</p>
-          </Link>
-        )
-      })}
+      <Link
+        to="/home"
+        className={styles.link}
+        aria-current={isCurrent('/home') ? 'page' : undefined}
+      >
+        <div className={styles.icon}>
+          <UtensilsCrossed className={styles.image} />
+        </div>
+        <p className={styles.label}>メニュー</p>
+      </Link>
+
+      <Link
+        to="/order-history"
+        className={styles.link}
+        aria-current={isCurrent('/order-history') ? 'page' : undefined}
+      >
+        <div className={styles.icon}>
+          <History className={styles.image} />
+        </div>
+        <p className={styles.label}>注文履歴</p>
+      </Link>
+
+      <button type="button" className={styles.link} onClick={() => dispatch(openCart())}>
+        <div className={styles.icon}>
+          <ShoppingCart className={styles.image} />
+          {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+        </div>
+        <p className={styles.label}>カート</p>
+      </button>
     </nav>
   )
 }

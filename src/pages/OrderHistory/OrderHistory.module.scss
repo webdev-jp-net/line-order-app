@@ -1,0 +1,86 @@
+@use "style/_variable" as *;
+
+.orderHistory {
+  @include tmp_column;
+
+  display: flex;
+  flex-direction: column;
+  gap: rem(16);
+  padding: rem(16) rem(16) rem(60);
+  margin: 0;
+}
+
+.title {
+  font-size: rem(20);
+  font-weight: 700;
+}
+
+.empty {
+  color: var(--txt-basic);
+}
+
+.orderList {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  padding: rem(16) 0;
+
+  ~ .order {
+    border-top: 1px solid var(--border-default);
+  }
+}
+
+.orderHead {
+  display: flex;
+  gap: rem(8);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date {
+  font-size: rem(13);
+  color: var(--txt-basic);
+}
+
+.status {
+  font-size: rem(14);
+  font-weight: 700;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: rem(4);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  gap: rem(8);
+  justify-content: space-between;
+  font-size: rem(15);
+}
+
+.itemName {
+  flex: 1;
+}
+
+.itemPrice {
+  flex-shrink: 0;
+}
+
+.total {
+  font-size: rem(15);
+  font-weight: 700;
+  text-align: right;
+}

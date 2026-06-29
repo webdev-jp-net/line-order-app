@@ -6,8 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: rem(16);
-  padding: rem(16);
-  padding: 0;
+  padding: rem(16) rem(16) rem(60);
   margin: 0;
 }
 
@@ -22,6 +21,7 @@
   gap: rem(12);
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
 .item {
@@ -45,8 +45,14 @@
 }
 
 .category {
-  font-size: rem(12);
-  color: var(--txt-basic);
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+}
+
+.categoryName {
+  font-size: rem(16);
+  font-weight: 700;
 }
 
 .name {
@@ -56,4 +62,8 @@
 
 .price {
   font-size: rem(15);
+}
+
+[class].cart {
+  width: fit-content;
 }
