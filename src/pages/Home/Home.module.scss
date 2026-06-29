@@ -11,6 +11,13 @@
   margin: 0;
 }
 
+.heading {
+  display: flex;
+  place-items: center;
+  justify-content: space-between;
+  gap: rem(12);
+}
+
 .title {
   font-size: rem(20);
   font-weight: 700;
