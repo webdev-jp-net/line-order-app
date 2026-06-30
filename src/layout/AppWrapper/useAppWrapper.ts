@@ -23,13 +23,11 @@ export const useAppWrapper = () => {
   // 認証
   const { actLoginLiff, userToken, error, loading } = useAuthLiff()
 
-  // LIFF初期化（初回のみ実行）
-  // userToken: undefined = 未初期化, null = 認証失敗, string = 認証成功
+  // LIFF初期化（ページロードごとに1回）
+  // userToken は永続化されるため、復元値の有無に関わらず liff.init() を実行する
   useEffect(() => {
-    if (userToken === undefined && !error) {
-      actLoginLiff()
-    }
-  }, [userToken, error, actLoginLiff])
+    actLoginLiff()
+  }, [actLoginLiff])
 
   // 401エラー後の再認証（ダイアログクローズ後に実行）
   useEffect(() => {
