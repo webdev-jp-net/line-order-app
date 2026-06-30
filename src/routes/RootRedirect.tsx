@@ -9,12 +9,6 @@ const hasLiffCallbackParams = (search: string) => {
   }
 
   const params = new URLSearchParams(search)
-
-  // OAuth(PKCE)ログインの戻り（?code=...&state=...）
-  if (params.has('code') && params.has('state')) {
-    return true
-  }
-
   for (const key of params.keys()) {
     if (key.toLowerCase().startsWith('liff')) {
       return true
