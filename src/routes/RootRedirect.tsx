@@ -1,7 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom'
 
-import { useAppSelector } from 'store'
-
 // LIFFコールバックパラメーターがあるかどうかを判定
 const hasLiffCallbackParams = (search: string) => {
   if (!search) {
@@ -9,6 +7,12 @@ const hasLiffCallbackParams = (search: string) => {
   }
 
   const params = new URLSearchParams(search)
+
+  // OAuth(PKCE)ログインの戻り（?code=...&state=...）
+  if (params.has('code') && params.has('state')) {
+    return true
+  }
+
   for (const key of params.keys()) {
     if (key.toLowerCase().startsWith('liff')) {
       return true
@@ -20,9 +24,12 @@ const hasLiffCallbackParams = (search: string) => {
 
 export const RootRedirect = () => {
   const location = useLocation()
-  const userToken = useAppSelector(state => state.liffUser.userToken)
 
-  const shouldWaitForLiffLogin = hasLiffCallbackParams(location.search) && !userToken
+  // 永続化された userToken を条件にすると、復元値が残る再訪時に
+  // liff.init() がコールバックのクエリを消化する前に捨ててしまい、
+  // ログインが完了できず無限ループする（#16）。
+  // コールバックパラメーターがある間は常に待機する
+  const shouldWaitForLiffLogin = hasLiffCallbackParams(location.search)
 
   // LIFFログイン待機中はリダイレクトしない
   if (shouldWaitForLiffLogin) {
