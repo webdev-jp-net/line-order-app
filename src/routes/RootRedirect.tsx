@@ -25,10 +25,8 @@ const hasLiffCallbackParams = (search: string) => {
 export const RootRedirect = () => {
   const location = useLocation()
 
-  // 永続化された userToken を条件にすると、復元値が残る再訪時に
-  // liff.init() がコールバックのクエリを消化する前に捨ててしまい、
-  // ログインが完了できず無限ループする（#16）。
   // コールバックパラメーターがある間は常に待機する
+  // 待機判定に userToken を使わない理由: _document/_llm-docs/spec/user-app/line-auth.md「コールバック処理の制約」（#16）
   const shouldWaitForLiffLogin = hasLiffCallbackParams(location.search)
 
   // LIFFログイン待機中はリダイレクトしない
