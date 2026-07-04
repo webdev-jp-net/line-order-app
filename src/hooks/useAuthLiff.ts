@@ -41,7 +41,6 @@ export const useAuthLiff = (): QueryStatus => {
 
         // LIFFアプリにログインする
         const liffId = import.meta.env.VITE_LIFF_ID as string
-        console.log({ liffId })
 
         // IDトークンの期限切れ対策
         clearExpiredIdToken(liffId)
@@ -60,20 +59,21 @@ export const useAuthLiff = (): QueryStatus => {
             },
           })
 
-          // サーバーエラーの場合は共通のエラーダイアログを表示
+          // エラーレスポンスの場合は共通のエラーダイアログを表示し、成功処理へ進めない
           if (!fetchRes.ok) {
+            // サーバーエラー
             if (fetchRes.status === 500) {
               dispatch(setGlobalError(true))
               dispatch(setErrorMessage('サーバーエラーが発生しました。'))
             }
-          }
-
-          // セッションエラーの場合は共通のエラーダイアログを表示
-          if (!fetchRes.ok) {
+            // セッションエラー: 認証状態をリセットして再ログインを促す
+            // （userToken を null 化することで、ダイアログのユーザー操作起点の再ログインが働く）
             if (fetchRes.status === 401) {
+              dispatch(failureLiffLogin())
               dispatch(setTokenError(true))
               dispatch(setErrorMessage('再ログインが必要です。'))
             }
+            return
           }
 
           const resBody = (await fetchRes.json()) as {

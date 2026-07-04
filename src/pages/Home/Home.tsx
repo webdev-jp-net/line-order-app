@@ -48,37 +48,41 @@ export const Home: FC = () => {
       <Head pageTitle="メニュー" />
       <main className={styles.menu} data-testid="home">
         <h1 className={styles.title}>メニュー</h1>
-        {menuGroups.map(group => (
+        {menuGroups.map((group, groupIndex) => (
           <section key={group.category.id} className={styles.category}>
             <h2 className={styles.categoryName}>{group.category.name}</h2>
             <ul className={styles.list}>
-              {group.items.map(item => (
-                <li key={item.id} className={styles.item}>
-                  {item.mainImage && (
-                    <img
-                      className={styles.image}
-                      src={item.mainImage.url}
-                      alt={item.name}
-                      width={item.mainImage.width}
-                      height={item.mainImage.height}
-                      loading="lazy"
-                    />
-                  )}
-                  <div className={styles.body}>
-                    <p className={styles.name}>{item.name}</p>
-                    <p className={styles.price}>¥{item.price.toLocaleString()}</p>
-                    <Button
-                      type="button"
-                      variant="accent"
-                      size="liquid"
-                      className={styles.cart}
-                      onClick={() => handleAdd(item)}
-                    >
-                      追加
-                    </Button>
-                  </div>
-                </li>
-              ))}
+              {group.items.map((item, itemIndex) => {
+                // 先頭カテゴリの最初の1枚はLCP候補: 優先読み込みしlazyにしない
+                const isLcpCandidate = groupIndex === 0 && itemIndex === 0
+                return (
+                  <li key={item.id} className={styles.item}>
+                    {item.mainImage && (
+                      <img
+                        className={styles.image}
+                        src={item.mainImage.url}
+                        alt={item.name}
+                        width={item.mainImage.width}
+                        height={item.mainImage.height}
+                        {...(isLcpCandidate ? { fetchPriority: 'high' } : { loading: 'lazy' })}
+                      />
+                    )}
+                    <div className={styles.body}>
+                      <p className={styles.name}>{item.name}</p>
+                      <p className={styles.price}>¥{item.price.toLocaleString()}</p>
+                      <Button
+                        type="button"
+                        variant="accent"
+                        size="liquid"
+                        className={styles.cart}
+                        onClick={() => handleAdd(item)}
+                      >
+                        追加
+                      </Button>
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           </section>
         ))}
