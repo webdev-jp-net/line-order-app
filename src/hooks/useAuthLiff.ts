@@ -41,7 +41,6 @@ export const useAuthLiff = (): QueryStatus => {
 
         // LIFFアプリにログインする
         const liffId = import.meta.env.VITE_LIFF_ID as string
-        console.log({ liffId })
 
         // IDトークンの期限切れ対策
         clearExpiredIdToken(liffId)
