@@ -9,8 +9,6 @@ import { Maintenance } from 'pages/Maintenance'
 import { NotFound } from 'pages/NotFound'
 import { OrderHistory } from 'pages/OrderHistory'
 
-import { RootRedirect } from './RootRedirect'
-
 const maintenanceMode = false
 
 export const App: FC = () => {
@@ -25,9 +23,8 @@ export const App: FC = () => {
             children: [
               {
                 index: true,
-                element: <RootRedirect />,
+                element: <Home />,
               },
-              { path: 'home', element: <Home /> },
               { path: 'order-history', element: <OrderHistory /> },
             ],
           },
