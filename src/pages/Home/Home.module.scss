@@ -1,4 +1,4 @@
-@use "style/_variable" as *;
+@use 'style/_variable' as *;
 
 .menu {
   @include tmp_column;

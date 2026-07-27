@@ -1,4 +1,4 @@
-@use "style/_variable" as *;
+@use 'style/_variable' as *;
 
 .orderHistory {
   @include tmp_column;

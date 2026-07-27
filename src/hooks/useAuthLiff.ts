@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import liff from '@line/liff/core'
 import GetAccessToken from '@line/liff/get-access-token'
-import GetIdDoken from '@line/liff/get-id-token'
+import GetIdToken from '@line/liff/get-id-token'
 import { setError as setGlobalError, setTokenError, setErrorMessage } from 'store/layout'
 import { successLiffLogin, failureLiffLogin } from 'store/liffUser'
 
@@ -13,7 +13,7 @@ import type { RootState } from '../store'
 /**
  * LIFF APIを有効化する::liff.init()よりも前に呼び出す必要がある
  */
-liff.use(new GetIdDoken())
+liff.use(new GetIdToken())
 // 注文時のサービス通知トークン発行に使う LIFF アクセストークン取得を有効化する
 liff.use(new GetAccessToken())
 

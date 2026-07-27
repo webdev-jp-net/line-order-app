@@ -2,7 +2,6 @@ import { Confirm } from './Confirm'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-
 export default {
   title: 'form/Confirm',
   component: Confirm,

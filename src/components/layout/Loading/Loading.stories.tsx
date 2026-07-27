@@ -2,7 +2,6 @@ import { Loading } from './Loading'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-
 export default {
   title: 'layout/Loading',
   component: Loading,
