@@ -102,3 +102,6 @@ serena_config.yml
 
 # Cloudflare
 .wrangler/
+
+# Playwright
+.playwright-mcp/
