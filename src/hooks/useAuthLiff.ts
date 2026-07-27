@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import liff from '@line/liff/core'
 import GetAccessToken from '@line/liff/get-access-token'
-import GetIdDoken from '@line/liff/get-id-token'
+import GetIdToken from '@line/liff/get-id-token'
 import { setError as setGlobalError, setTokenError, setErrorMessage } from 'store/layout'
 import { successLiffLogin, failureLiffLogin } from 'store/liffUser'
 
@@ -13,7 +13,7 @@ import type { RootState } from '../store'
 /**
  * LIFF APIを有効化する::liff.init()よりも前に呼び出す必要がある
  */
-liff.use(new GetIdDoken())
+liff.use(new GetIdToken())
 // 注文時のサービス通知トークン発行に使う LIFF アクセストークン取得を有効化する
 liff.use(new GetAccessToken())
 
@@ -41,7 +41,6 @@ export const useAuthLiff = (): QueryStatus => {
 
         // LIFFアプリにログインする
         const liffId = import.meta.env.VITE_LIFF_ID as string
-        console.log({ liffId })
 
         // IDトークンの期限切れ対策
         clearExpiredIdToken(liffId)
@@ -60,20 +59,21 @@ export const useAuthLiff = (): QueryStatus => {
             },
           })
 
-          // サーバーエラーの場合は共通のエラーダイアログを表示
+          // エラーレスポンスの場合は共通のエラーダイアログを表示し、成功処理へ進めない
           if (!fetchRes.ok) {
+            // サーバーエラー
             if (fetchRes.status === 500) {
               dispatch(setGlobalError(true))
               dispatch(setErrorMessage('サーバーエラーが発生しました。'))
             }
-          }
-
-          // セッションエラーの場合は共通のエラーダイアログを表示
-          if (!fetchRes.ok) {
+            // セッションエラー: 認証状態をリセットして再ログインを促す
+            // （userToken を null 化することで、ダイアログのユーザー操作起点の再ログインが働く）
             if (fetchRes.status === 401) {
+              dispatch(failureLiffLogin())
               dispatch(setTokenError(true))
               dispatch(setErrorMessage('再ログインが必要です。'))
             }
+            return
           }
 
           const resBody = (await fetchRes.json()) as {

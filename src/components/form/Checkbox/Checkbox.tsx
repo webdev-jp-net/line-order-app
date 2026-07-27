@@ -4,7 +4,6 @@ import styles from './Checkbox.module.scss'
 
 import { useCheckbox } from './useCheckbox'
 
-
 interface CheckboxOption {
   label: string
   value: string | number

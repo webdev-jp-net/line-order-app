@@ -9,7 +9,7 @@ interface UseTextareaProps {
 export const useTextarea = ({ syncValue, defaultValue = '', maxLength }: UseTextareaProps) => {
   // 入力値
   const [inputValue, setInputValue] = useState(defaultValue)
-  
+
   // defaultValueが変更されたときに入力値を更新
   useEffect(() => {
     if (defaultValue !== undefined) {

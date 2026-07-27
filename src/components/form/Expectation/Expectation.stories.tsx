@@ -2,7 +2,6 @@ import { Expectation } from './Expectation'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-
 const meta: Meta<typeof Expectation> = {
   title: 'form/Expectation',
   component: Expectation,

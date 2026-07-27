@@ -13,15 +13,12 @@ export const GlobalMenu: FC = () => {
   const dispatch = useAppDispatch()
   const cartCount = useAppSelector(selectCartCount)
 
-  const isCurrent = (path: string) => location.pathname.startsWith(path)
+  const isCurrent = (path: string) =>
+    path === '/' ? location.pathname === path : location.pathname.startsWith(path)
 
   return (
     <nav className={styles.globalMenu}>
-      <Link
-        to="/home"
-        className={styles.link}
-        aria-current={isCurrent('/home') ? 'page' : undefined}
-      >
+      <Link to="/" className={styles.link} aria-current={isCurrent('/') ? 'page' : undefined}>
         <div className={styles.icon}>
           <UtensilsCrossed className={styles.image} />
         </div>

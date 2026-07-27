@@ -1,9 +1,9 @@
-import { useCallback, useState, useEffect, ReactNode } from 'react';
+import { useCallback, useState, useEffect, ReactNode } from 'react'
 
 interface useCopyToClipboardProps {
-  text: string;
-  successMessage?: ReactNode;
-  errorMessage?: string;
+  text: string
+  successMessage?: ReactNode
+  errorMessage?: string
 }
 
 export const useCopyToClipboard = ({
@@ -11,33 +11,33 @@ export const useCopyToClipboard = ({
   successMessage = 'コピーしました',
   errorMessage = 'コピーに失敗しました',
 }: useCopyToClipboardProps) => {
-  const [availableClipboard, setAvailableClipboard] = useState(false);
+  const [availableClipboard, setAvailableClipboard] = useState(false)
 
   // ダイアログの表示状態
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false)
   // ダイアログのメッセージ
-  const [message, setMessage] = useState<ReactNode>('');
+  const [message, setMessage] = useState<ReactNode>('')
 
   useEffect(() => {
     // クリップボードへのコピーが可能かどうか判定
-    if (!navigator.clipboard) return;
-    setAvailableClipboard(true);
-  }, []);
+    if (!navigator.clipboard) return
+    setAvailableClipboard(true)
+  }, [])
 
   // テキストをクリップボードへコピー
   const handleCopyText = useCallback(() => {
-    if (!navigator.clipboard) return;
+    if (!navigator.clipboard) return
     navigator.clipboard.writeText(text).then(
       () => {
-        setMessage(successMessage);
-        setOpenDialog(true);
+        setMessage(successMessage)
+        setOpenDialog(true)
       },
       () => {
-        setMessage(errorMessage);
-        setOpenDialog(true);
+        setMessage(errorMessage)
+        setOpenDialog(true)
       }
-    );
-  }, [text, successMessage, errorMessage]);
+    )
+  }, [text, successMessage, errorMessage])
 
   return {
     availableClipboard,
@@ -45,5 +45,5 @@ export const useCopyToClipboard = ({
     openDialog,
     setOpenDialog,
     message,
-  };
-};
+  }
+}

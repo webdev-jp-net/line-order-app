@@ -1,1 +1,1 @@
-export { Expectation } from './Expectation' 
+export { Expectation } from './Expectation'
