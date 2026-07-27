@@ -7,8 +7,6 @@ import { Button } from './Button'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-
-
 /**
  * ボタンコンポーネント
  *

@@ -1,4 +1,3 @@
-
 import { Lightbulb, HelpCircle } from 'lucide-react'
 
 import { Disclosure } from './Disclosure'

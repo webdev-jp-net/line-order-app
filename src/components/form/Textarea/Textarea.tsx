@@ -4,7 +4,6 @@ import styles from './Textarea.module.scss'
 
 import { useTextarea } from './useTextarea'
 
-
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   children?: React.ReactNode
   defaultValue?: string

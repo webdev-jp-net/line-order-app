@@ -2,7 +2,6 @@ import { Checkbox } from './Checkbox'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-
 export default {
   title: 'form/Checkbox',
   component: Checkbox,

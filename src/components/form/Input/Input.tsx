@@ -4,7 +4,6 @@ import styles from './Input.module.scss'
 
 import { useInput } from './useInput'
 
-
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode
   defaultValue?: string

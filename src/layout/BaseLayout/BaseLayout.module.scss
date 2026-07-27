@@ -5,7 +5,7 @@
   display: grid;
   padding: 0 0 var(--navigation-height); // グロナビの高さ分上げる
 
-  header~& {
+  header ~ & {
     padding-top: var(--layout-header-height);
   }
 }

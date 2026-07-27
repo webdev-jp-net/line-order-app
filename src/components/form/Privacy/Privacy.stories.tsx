@@ -2,7 +2,6 @@ import { Privacy } from './Privacy'
 
 import type { Meta, StoryObj } from '@storybook/react'
 
-
 export default {
   title: 'form/Privacy',
   component: Privacy,

@@ -22,4 +22,4 @@ export const useExpectation = ({ value, onChange }: UseExpectationProps) => {
     selectedValue,
     handleChange,
   }
-} 
+}

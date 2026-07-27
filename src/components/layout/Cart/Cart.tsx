@@ -73,7 +73,12 @@ export const Cart: FC = () => {
 
         <footer className={styles.footer}>
           <p className={styles.total}>合計 ¥{total.toLocaleString()}</p>
-          <Button type="button" variant="basic" onClick={handleRequestOrder} disabled={items.length === 0}>
+          <Button
+            type="button"
+            variant="basic"
+            onClick={handleRequestOrder}
+            disabled={items.length === 0}
+          >
             注文
           </Button>
         </footer>

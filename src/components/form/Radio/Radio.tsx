@@ -4,7 +4,6 @@ import styles from './Radio.module.scss'
 
 import { useRadio } from './useRadio'
 
-
 interface RadioOption {
   label: React.ReactNode
   value: string | number
