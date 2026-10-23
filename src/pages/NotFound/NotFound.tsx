@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 import { Home } from 'lucide-react'
 

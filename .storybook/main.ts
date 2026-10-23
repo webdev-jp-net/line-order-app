@@ -1,4 +1,4 @@
-import { alias } from '../vite.config'
+import { alias } from '../vite.config.ts'
 
 import type { StorybookConfig } from '@storybook/react-vite'
 

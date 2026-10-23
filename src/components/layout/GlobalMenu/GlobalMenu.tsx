@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router'
 
 import { UtensilsCrossed, ShoppingCart, History } from 'lucide-react'
 import { useAppDispatch, useAppSelector } from 'store'

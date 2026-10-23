@@ -1,6 +1,6 @@
 import { FC, Fragment } from 'react'
 
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router'
 
 import { Splash } from 'components/layout/Splash'
 import { Button } from 'components/ui/Button'

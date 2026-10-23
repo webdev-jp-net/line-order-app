@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 type UseInputProps = {
   defaultValue?: string
@@ -7,12 +7,14 @@ type UseInputProps = {
 
 export const useInput = ({ defaultValue = '', syncValue }: UseInputProps) => {
   // 入力値を保持するステート
-  const [inputValue, setInputValue] = useState<string>('')
+  const [inputValue, setInputValue] = useState<string>(defaultValue ?? '')
 
-  // 親コンポーネントから渡された入力初期値をセット
-  useEffect(() => {
-    setInputValue(() => defaultValue ?? '')
-  }, [defaultValue])
+  // 親コンポーネントから渡された入力初期値が変わったときにセット
+  const [prevDefaultValue, setPrevDefaultValue] = useState(defaultValue)
+  if (!Object.is(defaultValue, prevDefaultValue)) {
+    setPrevDefaultValue(defaultValue)
+    setInputValue(defaultValue ?? '')
+  }
 
   const handleChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(() => event.target.value)

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface UseTextareaProps {
   syncValue?: (value: string) => void
@@ -11,11 +11,13 @@ export const useTextarea = ({ syncValue, defaultValue = '', maxLength }: UseText
   const [inputValue, setInputValue] = useState(defaultValue)
 
   // defaultValueが変更されたときに入力値を更新
-  useEffect(() => {
+  const [prevDefaultValue, setPrevDefaultValue] = useState(defaultValue)
+  if (!Object.is(defaultValue, prevDefaultValue)) {
+    setPrevDefaultValue(defaultValue)
     if (defaultValue !== undefined) {
       setInputValue(defaultValue)
     }
-  }, [defaultValue])
+  }
 
   const currentLength = inputValue.length
 

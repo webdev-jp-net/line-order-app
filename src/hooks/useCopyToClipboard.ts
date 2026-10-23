@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect, ReactNode } from 'react'
+import { useCallback, useState, ReactNode } from 'react'
 
 interface useCopyToClipboardProps {
   text: string
@@ -11,18 +11,13 @@ export const useCopyToClipboard = ({
   successMessage = 'コピーしました',
   errorMessage = 'コピーに失敗しました',
 }: useCopyToClipboardProps) => {
-  const [availableClipboard, setAvailableClipboard] = useState(false)
+  // クリップボードへのコピーが可能かどうか判定
+  const [availableClipboard] = useState(() => Boolean(navigator.clipboard))
 
   // ダイアログの表示状態
   const [openDialog, setOpenDialog] = useState<boolean>(false)
   // ダイアログのメッセージ
   const [message, setMessage] = useState<ReactNode>('')
-
-  useEffect(() => {
-    // クリップボードへのコピーが可能かどうか判定
-    if (!navigator.clipboard) return
-    setAvailableClipboard(true)
-  }, [])
 
   // テキストをクリップボードへコピー
   const handleCopyText = useCallback(() => {
