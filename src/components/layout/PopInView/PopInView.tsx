@@ -33,18 +33,31 @@ export const PopInView: FC<PopInViewProps> = ({
     rootMargin: validRootMargin,
   })
 
+  const isIntersecting = entry?.isIntersecting
   const [isVisible, setIsVisible] = useState(false)
 
-  useEffect(() => {
-    if (entry?.isIntersecting) {
+  // 交差状態かonceが変わったときだけ表示状態を合わせる
+  const [prevIntersecting, setPrevIntersecting] = useState(isIntersecting)
+  const [prevOnce, setPrevOnce] = useState(once)
+  if (!Object.is(isIntersecting, prevIntersecting) || !Object.is(once, prevOnce)) {
+    setPrevIntersecting(isIntersecting)
+    setPrevOnce(once)
+    if (isIntersecting) {
       setIsVisible(true)
-      callback?.(true)
     } else if (!once) {
       setIsVisible(false)
+    }
+  }
+
+  // 親への通知は副作用なのでeffectに残す
+  useEffect(() => {
+    if (isIntersecting) {
+      callback?.(true)
+    } else if (!once) {
       callback?.(false)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry?.isIntersecting, once])
+  }, [isIntersecting, once])
 
   return (
     <div

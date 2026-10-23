@@ -49,8 +49,10 @@ export default defineConfig(({ command }) => {
     optimizeDeps: {
       include: ['react', 'react-dom', 'react/jsx-runtime'],
       exclude: [],
-      esbuildOptions: {
-        target: 'es2020',
+      rolldownOptions: {
+        transform: {
+          target: 'es2020',
+        },
       },
     },
 
@@ -64,6 +66,9 @@ export default defineConfig(({ command }) => {
       // HMR設定
       hmr: {
         overlay: true,
+      },
+      // HMR用WebSocketの接続先ポート
+      ws: {
         clientPort: 3000,
       },
       // ファイル監視設定
@@ -78,23 +83,29 @@ export default defineConfig(({ command }) => {
       sourcemap: command === 'build' ? false : true,
       target: 'es2020',
       // チャンク分割設定
-      rollupOptions: {
+      rolldownOptions: {
         output: {
-          manualChunks: {
-            vendor: [
-              'react',
-              'react-router-dom',
-              'react-dom',
-              'react-redux',
-              '@reduxjs/toolkit',
-              '@reduxjs/toolkit/query/react',
-              'redux-persist',
+          codeSplitting: {
+            groups: [
+              {
+                name: 'vendor',
+                test: /[\\/]node_modules[\\/](react|react-router|react-dom|react-redux|@reduxjs[\\/]toolkit|redux-persist)[\\/]/,
+              },
             ],
+          },
+          // 本番環境でのconsole.log削除
+          minify: {
+            compress: {
+              dropConsole: true,
+              dropDebugger: true,
+            },
+            mangle: true,
+            codegen: true,
           },
         },
       },
       // ビルド最適化
-      minify: 'esbuild',
+      minify: 'oxc',
       cssCodeSplit: true,
       // アセット処理
       assetsInlineLimit: 4096,
@@ -106,11 +117,9 @@ export default defineConfig(({ command }) => {
     //   https: httpsOptions,
     // },
 
-    // esbuild設定
-    esbuild: {
+    // oxc設定
+    oxc: {
       target: 'es2020',
-      // 本番環境でのconsole.log削除
-      drop: command === 'build' ? ['console', 'debugger'] : [],
       // JSXのimport最適化
       jsxInject: `import React from 'react'`,
     },
@@ -124,7 +133,6 @@ export default defineConfig(({ command }) => {
       preprocessorOptions: {
         scss: {
           quietDeps: true,
-          silenceDeprecations: ['mixed-decls'],
         },
       },
     },
