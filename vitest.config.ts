@@ -1,8 +1,7 @@
-/// <reference types="vitest" />
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 
-import { alias } from './vite.config'
+import { alias } from './vite.config.ts'
 
 export default defineConfig({
   plugins: [react()],

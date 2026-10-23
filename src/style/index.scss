@@ -1,4 +1,4 @@
-@use 'modern-css-reset';
+@use 'modern-css-reset/dist/reset.min';
 @use 'sass:math';
 @use 'style/_variable' as *;
 @import 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400..700&display=swap';
